@@ -11,6 +11,7 @@ export default {
 
       baseUrl: 'http://127.0.0.1:8000',
       doctors: [],
+      
     }
   },
   created() {
@@ -26,21 +27,23 @@ export default {
           this.doctors = res.data.doctors
         })
     },
-    getApiUser() {
-      axios.get(`${this.baseUrl}/api/user`)
-        .then((res) => {
-          this.doctors = res.data.user
-        })
-    }
+    
   }
 }
 </script>
 
 <template>
   <h1>Ciao mondo</h1>
-  <ul>
-    <li v-for="(elem, index) in doctors" :key="index">{{ elem.description }}</li>
-  </ul>
+  <div>
+    <div v-for="(doctor, index) in doctors" :key="index">
+      <h2>{{ doctor.name }}</h2>
+      <p>{{ doctor.description }}</p>
+      <ul> 
+        <span class="text-bold">Specializations:</span> 
+        <li v-for="(specialization,index) in doctor.specializations" :key="index">{{specialization.name}}</li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">
