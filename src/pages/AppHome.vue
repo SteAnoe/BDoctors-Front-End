@@ -15,6 +15,8 @@ export default {
             selectedStar: null,
             //filteredDoctor: [],
             minVoteFilter: 0,
+            currentPage: 1,
+            lastPage: null,
         }
     },
     created() {
@@ -25,7 +27,6 @@ export default {
             if (this.minVoteFilter === 0) {
                 return this.doctors; // Show all doctors if minimum vote is 0
             }
-
             return this.filterDoctorsByVote(this.minVoteFilter);
         }
     },
@@ -43,7 +44,7 @@ export default {
     methods: {
 
         getApiDoctor(doctorApiPage) {
-            // Check if there are selected specializations
+
             if (this.selectedSpecializations.length > 0) {
                 const params = {
                     page: doctorApiPage,
@@ -52,33 +53,18 @@ export default {
 
                 axios.get(`${this.baseUrl}/api/doctors`, { params })
                     .then((res) => {
-                        this.doctors = res.data.doctors;
+                        this.doctors = res.data.doctors.data
+                        this.currentPage = res.data.doctors.current_page
+                        this.lastPage = res.data.doctors.last_page
                     })
                     .catch((error) => {
                         console.error('Error fetching doctors:', error);
                     });
             } else {
-                // If no specializations are selected, you may want to handle this case accordingly
-                // For example, you can clear the doctors array or display a message to the user.
                 this.doctors = [];
             }
         },
-        // getApiDoctor(doctorApiPage) {
-        //     const params = {
-        //         page: doctorApiPage,
 
-        //     }
-        //     if (this.selectedSpecializations.length > 0) {
-        //         params.specializations_ids = this.selectedSpecializations.join(',');
-        //     }
-
-
-        //     axios.get(`${this.baseUrl}/api/doctors`, { params })
-        //         .then((res) => {
-        //             this.doctors = res.data.doctors
-
-        //         })
-        // },
         getApiSpecializations() {
             axios.get(`${this.baseUrl}/api/specializations`)
                 .then(res => {
@@ -88,26 +74,19 @@ export default {
 
         calculateAverageVote(doctor) {
             if (doctor.reviews.length === 0) {
-                return 0; // No reviews, average vote is 0
+                return 0;
             }
-
-            // Calculate the sum of all stars in the reviews
             const totalStars = doctor.reviews.reduce((acc, review) => acc + parseInt(review.stars), 0);
-            // Calculate the average by dividing the total stars by the number of reviews
             const averageVote = totalStars / doctor.reviews.length;
-
             return averageVote;
         },
 
-        // Add a method to filter doctors based on the selected minimum average vote
         filterDoctorsByVote(minVote) {
             return this.doctors.filter((doctor) => {
                 const averageVote = this.calculateAverageVote(doctor);
                 return averageVote >= minVote;
             });
         },
-
-
     }
 }
 </script>
@@ -141,15 +120,21 @@ export default {
             </ul>
         </div>
     </div>
-    <!-- <div>
-        <div v-for="(doctor, index) in doctors" :key="index">
-            <h2>{{ doctor.name }}</h2>
-
-            <ul>
-                <span class="text-bold">Specializations:</span>
-                <li v-for="(specialization, index) in doctor.specializations" :key="index">{{ specialization.name }}</li>
-            </ul>
-        </div>
-    </div> -->
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" @click.prevent="getApiDoctor(currentPage - 1)" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item" v-for="(elem, index) in lastPage" :key="index"
+            :class="(currentPage === elem) ? 'active' : ''">
+            <a class="page-link" href="#" @click.prevent="getApiDoctor(elem)">{{ elem }}</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" @click.prevent="getApiDoctor(currentPage + 1)" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
 </template>
 <style lang="scss" scoped></style>
