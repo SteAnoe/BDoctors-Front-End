@@ -58,7 +58,16 @@ methods:{
             </div>
         </div>
     </div>
-    <a href="" class="btn btn-warning" @click.prevent="goBack">Go Back</a>
+    <!-- <a href="" class="btn btn-warning" @click.prevent="goBack">Go Back</a> -->
+    <div class="container">
+        <h2>Reviews per il dottor {{ doctor.name }} {{ doctor.lastname }}</h2>
+        <div class="card" v-for="(elem, index) in doctor.reviews" :key="index">
+            <h5>{{ elem.name }} {{ elem.lastname }}</h5>
+            <p>{{ elem.text }}</p>
+            <p>{{ elem.stars }}</p>
+
+        </div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
