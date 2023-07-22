@@ -13,33 +13,41 @@ export default {
             specializations: null,
             selectedSpecializations: [],
             selectedStar: null,
-            //filteredDoctor: [],
             minVoteFilter: 0,
             currentPage: 1,
             lastPage: null,
+            sortingOption: 'null',
         }
     },
     created() {
 
     },
     computed: {
+
         filteredDoctors() {
             if (this.minVoteFilter === 0) {
-                return this.doctors; // Show all doctors if minimum vote is 0
+              return this.doctors; 
             }
-            return this.filterDoctorsByVote(this.minVoteFilter);
-        }
+            const filteredDoctors = this.filterDoctorsByVote(this.minVoteFilter);
+            if (this.sortingOption === 'reviews') {
+              filteredDoctors.sort((a, b) => b.reviews.length - a.reviews.length);
+            } else if (this.sortingOption === 'average_vote') {
+              filteredDoctors.sort((a, b) => this.calculateAverageVote(b) - this.calculateAverageVote(a));
+            }
+        
+            return filteredDoctors;
+        },
+       
     },
     mounted() {
         this.getApiDoctor();
         this.getApiSpecializations();
-        // this.getFilterStar();
     },
     watch: {
         selectedSpecializations: {
             handler: 'getApiDoctor',
             deep: true
-        }
+        },
     },
     methods: {
 
@@ -53,7 +61,7 @@ export default {
 
                 axios.get(`${this.baseUrl}/api/doctors`, { params })
                     .then((res) => {
-                        this.doctors = res.data.doctors.data
+                        this.doctors = res.data.doctors
                         this.currentPage = res.data.doctors.current_page
                         this.lastPage = res.data.doctors.last_page
                     })
@@ -91,7 +99,7 @@ export default {
 }
 </script>
 <template>
-    <h1>Ciao mondo</h1>
+    <h1>Risultati ottenuti: <span>{{ filteredDoctors.length }}</span></h1>
     <div class="mb-3">
         <h2>Technologies Filter</h2>
         <label for="" v-for="(elem, index) in specializations" :key="index">
@@ -110,10 +118,18 @@ export default {
             <option :value="5">5 Stars</option>
         </select>
     </div>
+    <div class="mb-3">
+        <h2>Sort Doctors</h2>
+        <select v-model="sortingOption">
+            <option value="reviews">Sort by Reviews</option>
+            <option value="average_vote">Sort by Average Vote</option>
+        </select>
+    </div>
     <div>
         <div v-for="(doctor, index) in filteredDoctors" :key="index">
             <h2>{{ doctor.name }}</h2>
             <p>Average Vote: {{ calculateAverageVote(doctor) }}</p>
+            <p>Number of Reviews: {{ doctor.reviews.length }}</p>
             <ul>
                 <span class="text-bold">Specializations:</span>
                 <li v-for="(specialization, index) in doctor.specializations" :key="index">{{ specialization.name }}</li>

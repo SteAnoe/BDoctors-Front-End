@@ -19,7 +19,7 @@ export default {
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">/
+            <a class="navbar-brand d-flex align-items-center" href="#">
                 <!-- <div class="logo_laravel">
                 <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 150px">
                     <g clip-path="url(#clip0)" fill="#EF3B2D">
@@ -40,7 +40,7 @@ export default {
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">home</a>
+                        <a class="nav-link" href="http://localhost:5174/">home</a>
                     </li>
                 </ul>
 
@@ -49,21 +49,21 @@ export default {
                     <!-- Authentication Links -->
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#">log</a>
+                        <a class="nav-link" href="http://127.0.0.1:8000/login">log</a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#"> Reg</a>
+                        <a class="nav-link" href="http://127.0.0.1:8000/register"> Reg</a>
                     </li>
                   
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="http://127.0.0.1:8000/admin/dashboard" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            user name
+                            Il tuo profilo
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">dash</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/admin/dashboard">dash</a>
                             <a class="dropdown-item" href="#">prof</a>
                             <a class="dropdown-item" href="#" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
