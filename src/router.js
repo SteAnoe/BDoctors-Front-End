@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import AppHome from './pages/AppHome.vue';
 // import ProjectList from './pages/ProjectList.vue';
-// import SingleProject from './pages/SingleProject.vue';
-// import NotFound from './pages/NotFound.vue';
+import SingleDoctor from './pages/SingleDoctor.vue';
+import NotFound from './pages/NotFound.vue';
 // import Contacts from './pages/Contacts.vue';
 // import About from './pages/About.vue';
 
@@ -19,16 +19,16 @@ routes: [
     //     name: 'projects',
     //     component: ProjectList
     // },
-    // {
-    //     path: '/projects/:slug',
-    //     name: 'SingleProject',
-    //     component: SingleProject
-    // },
-    // {
-    //     path: '/:pathMatch(.)',
-    //     name: 'NotFound',
-    //     component: NotFound
-    // },
+    {
+        path: '/doctors/:slug',
+        name: 'SingleDoctor',
+        component: SingleDoctor
+    },
+    {
+        path: '/:pathMatch(.)',
+        name: 'NotFound',
+        component: NotFound
+    },
     // {
     //     path: '/contacts',
     //     name: 'contacts',

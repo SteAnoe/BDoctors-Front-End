@@ -128,6 +128,9 @@ export default {
     <div>
         <div v-for="(doctor, index) in filteredDoctors" :key="index">
             <h2>{{ doctor.name }}</h2>
+            <router-link class="router-link" :to="{name: 'SingleDoctor', params: {slug: doctor.slug}}">
+                <h5 class="card-title">doctor singolo</h5>
+            </router-link>
             <p>Average Vote: {{ calculateAverageVote(doctor) }}</p>
             <p>Number of Reviews: {{ doctor.reviews.length }}</p>
             <ul>
