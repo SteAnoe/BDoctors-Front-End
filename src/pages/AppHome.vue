@@ -12,31 +12,18 @@ export default {
             doctors: [],
             specializations: null,
             selectedSpecializations: [],
-            selectedStar: null,
             minVoteFilter: 0,
             currentPage: 1,
             lastPage: null,
             sortingOption: 'null',
+            sortBy: null,
         }
     },
     created() {
 
     },
     computed: {
-
-        filteredDoctors() {
-            if (this.minVoteFilter === 0) {
-              return this.doctors; 
-            }
-            const filteredDoctors = this.filterDoctorsByVote(this.minVoteFilter);
-            if (this.sortingOption === 'reviews') {
-              filteredDoctors.sort((a, b) => b.reviews.length - a.reviews.length);
-            } else if (this.sortingOption === 'average_vote') {
-              filteredDoctors.sort((a, b) => this.calculateAverageVote(b) - this.calculateAverageVote(a));
-            }
-        
-            return filteredDoctors;
-        },
+  
        
     },
     mounted() {
@@ -48,22 +35,27 @@ export default {
             handler: 'getApiDoctor',
             deep: true
         },
+        sortingOption: {
+            handler: 'applyFilter',
+            immediate: true,
+        },
     },
     methods: {
 
-        getApiDoctor(doctorApiPage) {
-
+        getApiDoctor(doctorApiPage, minVoteFilter = this.minVoteFilter, sortBy = this.sortBy) {
             if (this.selectedSpecializations.length > 0) {
                 const params = {
                     page: doctorApiPage,
-                    specializations_ids: this.selectedSpecializations.join(',')
+                    specializations_ids: this.selectedSpecializations.join(','),
+                    minVoteFilter: minVoteFilter,
+                    sortBy: sortBy,
                 };
-
+            
                 axios.get(`${this.baseUrl}/api/doctors`, { params })
                     .then((res) => {
-                        this.doctors = res.data.doctors
-                        this.currentPage = res.data.doctors.current_page
-                        this.lastPage = res.data.doctors.last_page
+                        this.doctors = res.data.doctors.data;
+                        this.currentPage = res.data.doctors.current_page;
+                        this.lastPage = res.data.doctors.last_page;
                     })
                     .catch((error) => {
                         console.error('Error fetching doctors:', error);
@@ -80,30 +72,21 @@ export default {
                 })
         },
 
-        calculateAverageVote(doctor) {
-            if (doctor.reviews.length === 0) {
-                return 0;
-            }
-            const totalStars = doctor.reviews.reduce((acc, review) => acc + parseInt(review.stars), 0);
-            const averageVote = totalStars / doctor.reviews.length;
-            return averageVote;
+        applyFilter() {
+            
+          
+          this.getApiDoctor();
         },
 
-        filterDoctorsByVote(minVote) {
-            return this.doctors.filter((doctor) => {
-                const averageVote = this.calculateAverageVote(doctor);
-                return averageVote >= minVote;
-            });
-        },
+
     }
 }
 </script>
 <template>
     <main class="container">
 
-        <h1>Risultati ottenuti: <span>{{ filteredDoctors.length }}</span></h1>
         <div class="mb-3">
-            <h2>Technologies Filter</h2>
+            <h2>Specializations Filter</h2>
             <label for="" v-for="(elem, index) in specializations" :key="index">
                 <input type="checkbox" :value="elem.id" v-model="selectedSpecializations">
                 {{ elem.name }}
@@ -111,7 +94,7 @@ export default {
         </div>
         <div class="mb-3">
             <h2>Filter By Average Vote</h2>
-            <select v-model="minVoteFilter">
+            <select v-model="minVoteFilter" @change="applyFilter">
                 <option :value="0">Show All</option>
                 <option :value="1">1 Star & Up</option>
                 <option :value="2">2 Stars & Up</option>
@@ -122,20 +105,21 @@ export default {
         </div>
         <div class="mb-3">
             <h2>Sort Doctors</h2>
-            <select v-model="sortingOption">
-                <option value="reviews">Sort by Reviews</option>
-                <option value="average_vote">Sort by Average Vote</option>
+            <select v-model="sortBy" @change="applyFilter">
+              <option :value="null">Sort by</option>
+              <option value="reviews">Sort by Reviews</option>
+              <option value="average_vote">Sort by Average Vote</option>
             </select>
         </div>
         <div>
             
-            <div v-for="(doctor, index) in filteredDoctors" :key="index">
+            <div v-for="(doctor, index) in doctors" :key="index">
                 <h2>{{ doctor.name }}</h2>
                 <router-link class="router-link" :to="{name: 'SingleDoctor', params: {slug: doctor.slug}}">
                     <h5 class="card-title">doctor singolo</h5>
                 </router-link>
-                <p>Average Vote: {{ calculateAverageVote(doctor) }}</p>
-                <p>Number of Reviews: {{ doctor.reviews.length }}</p>
+                <p>Number of Reviews: {{ doctor.reviews_count }}</p>
+                <p>Avg-stars: {{ doctor.avg_stars }}</p>
                 <ul>
                     <span class="text-bold">Specializations:</span>
                     <li v-for="(specialization, index) in doctor.specializations" :key="index">{{ specialization.name }}</li>
