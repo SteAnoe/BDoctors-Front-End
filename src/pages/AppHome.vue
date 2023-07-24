@@ -103,7 +103,7 @@ export default {
 
         <h1>Risultati ottenuti: <span>{{ filteredDoctors.length }}</span></h1>
         <div class="mb-3">
-            <h2>Technologies Filter</h2>
+            <h2>Specializations Filter</h2>
             <label for="" v-for="(elem, index) in specializations" :key="index">
                 <input type="checkbox" :value="elem.id" v-model="selectedSpecializations">
                 {{ elem.name }}
