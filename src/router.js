@@ -5,7 +5,7 @@ import SingleDoctor from './pages/SingleDoctor.vue';
 import NotFound from './pages/NotFound.vue';
 // import Contacts from './pages/Contacts.vue';
 // import About from './pages/About.vue';
-
+import AdvancedResearch from './pages/AdvancedResearch.vue';
 const router = createRouter({
 history: createWebHistory(),
 routes: [
@@ -14,11 +14,11 @@ routes: [
         name: 'home',
         component: AppHome
     },
-    // {
-    //     path: '/projects',
-    //     name: 'projects',
-    //     component: ProjectList
-    // },
+    {
+        path: '/specializations',
+        name: 'AdvancedResearch',
+        component: AdvancedResearch
+    },
     {
         path: '/doctors/:slug',
         name: 'SingleDoctor',
