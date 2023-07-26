@@ -25,13 +25,9 @@ export default {
         this.fetchDoctors();
     },
     computed: {
-  
-        
     },
     mounted() {
-        this.fetchDoctors();
-        
-        
+        this.fetchDoctors(); 
     },
     watch: {  
         sortingOption: {
@@ -40,82 +36,71 @@ export default {
         },
     },
     methods: {
+        fetchDoctors(doctorApiPage) {
+            const specializationSlug = this.$route.query.slug;
+            const minVoteFilter = this.minVoteFilter;
+            const sortBy = this.sortBy;
 
-   
-    fetchDoctors(doctorApiPage) {
-        const specializationSlug = this.$route.query.slug;
-        const minVoteFilter = this.minVoteFilter;
-        const sortBy = this.sortBy;
+            const params = {};
 
-        const params = {};
-
-        if (specializationSlug) {
-            // If a specialization slug is provided in the query, add it to the params object
-            params.slug = specializationSlug;
-        }
-    
-        if (minVoteFilter) {
-            // If minVoteFilter is provided, add it to the params object
-            params.minVoteFilter = minVoteFilter;
-        }
-    
-        if (sortBy) {
-            // If sortBy is provided, add it to the params object
-            params.sortBy = sortBy;
-        }
-        if (doctorApiPage) {
-          // If doctorApiPage is provided, add it to the params object
-          params.page = doctorApiPage;
-        }
-        if (specializationSlug) {
-        // If a specialization slug is provided in the query, fetch doctors for that specialization
-            axios.get(`${this.baseUrl}/api/specializations/${specializationSlug}`, { params })
-          .then((res) => {
-            console.log(res.data)
-            this.doctors = res.data.doctors.data;
-            this.currentPage = res.data.doctors.current_page;
-            this.lastPage = res.data.doctors.last_page;
-          })
-          .catch((error) => {
-            console.error('Error fetching doctors:', error);
-          });
-      } else {
-        // If no specialization slug is provided, fetch all doctors
-        axios.get(`${this.baseUrl}/api/doctors`)
-          .then((res) => {
-            console.log(res)
-            this.doctors = res.data.doctors.data;
-            this.currentPage = res.data.doctors.current_page;
-            this.lastPage = res.data.doctors.last_page;
-          })
-          .catch((error) => {
-            console.error('Error fetching doctors:', error);
-          });
-      }
-    },
+            if (specializationSlug) {
+                params.slug = specializationSlug;
+            }
+        
+            if (minVoteFilter) {
+                params.minVoteFilter = minVoteFilter;
+            }
+        
+            if (sortBy) {
+                params.sortBy = sortBy;
+            }
+            if (doctorApiPage) {
+              params.page = doctorApiPage;
+            }
+            if (specializationSlug) {
+                axios.get(`${this.baseUrl}/api/specializations/${specializationSlug}`, { params })
+                .then((res) => {
+                    console.log(res.data)
+                    this.doctors = res.data.doctors.data;
+                    this.currentPage = res.data.doctors.current_page;
+                    this.lastPage = res.data.doctors.last_page;
+                })
+                .catch((error) => {
+                    console.error('Error fetching doctors:', error);
+                });
+            } else {
+                axios.get(`${this.baseUrl}/api/doctors`)
+                .then((res) => {
+                    console.log(res)
+                    this.doctors = res.data.doctors.data;
+                    this.currentPage = res.data.doctors.current_page;
+                    this.lastPage = res.data.doctors.last_page;
+                })
+                .catch((error) => {
+                    console.error('Error fetching doctors:', error);
+                });
+            }
+        },
 
         applyFilter() {
             this.fetchDoctors();  
         },
-
-        
-
     }
 }
 </script>
 <template>
     <main class="container">
 
-      
+        
         <div class="mb-3">
             <h2>Filter By Average Vote</h2>
             <select v-model="minVoteFilter" @change="applyFilter">
                 <option :value="0">Show All</option>
-                <option :value="1">1 Star & Up</option>
-                <option :value="2">2 Stars & Up</option>
-                <option :value="3">3 Stars & Up</option>
-                <option :value="4">4 Stars & Up</option>
-                <option :value="5">5 Stars</option>
+                <option :value="1"><span >&#9733;</span></option>
+                <option :value="2">&#9733;&#9733;</option>
+                <option :value="3">&#9733;&#9733;&#9733;</option>
+                <option :value="4">&#9733;&#9733;&#9733;&#9733;</option>
+                <option :value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
             </select>
         </div>
         <div class="mb-3">

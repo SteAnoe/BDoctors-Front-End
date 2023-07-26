@@ -10,7 +10,13 @@ export default{
       name: '',
       lastname: '',
       email: '',
-      text: ''
+      text: '',
+      successMessage: '',
+      reviewName: '',
+      reviewText: '',
+      reviewStars: 0,
+      modalVisible: false,
+      isReviewModal: false,
     }
 },
 created(){
@@ -23,10 +29,12 @@ methods:{
 	getSingleDoctor(){
 		axios.get(`${this.baseUrl}/api/doctors/${this.$route.params.slug}`)
 		.then((response)=>{
-            console.log(response)
+           
             if(response.data.success) {
                 this.doctor = response.data.doctor;
-                
+                if (this.doctor.reviews && this.doctor.reviews.length > 0) {
+          this.doctor.reviews.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        }
             }
             else {
                 this.$router.push({name: 'NotFound'})
@@ -37,17 +45,20 @@ methods:{
 	},
     submitMessage() {
         const paramData = {
-                name: this.name,
-                email: this.email,
-                lastname: this.lastname,
-                text: this.text
-            }
+    doctor_id: this.doctor.id, // Add the doctor's id to the form data
+    name: this.name,
+    email: this.email,
+    lastname: this.lastname,
+    text: this.text
+  };
       // Make an API call to send the message to the backend
       // using Axios or other HTTP library
-      axios.post(`${this.baseUrl}/api/doctors/${this.$route.params.slug}/message`, paramData)
+      axios.post(`${this.baseUrl}/api/message`, paramData)
         .then(() => {
           // Show a success message or perform other actions after successful submission
-          alert("Message sent successfully!");
+          this.isReviewModal = false;
+          this.successMessage = 'Message sent successfully!';
+          this.showModal();
           // Clear the form data after successful submission
           
             this.name = "",
@@ -57,8 +68,63 @@ methods:{
           
         });
         
+    },
+    showModal() {
+      this.$refs.modal.classList.add('show');
+      this.$refs.modal.style.display = 'block';
+    },
+
+    closeModal() {
+      this.$refs.modal.classList.remove('show');
+      this.$refs.modal.style.display = 'none';
+      if (this.isReviewModal) {
+        window.location.reload();
+      }
+    },
+    submitMessageAndCloseModal() {
+      this.submitMessage();
+      this.closeModal();
+    },
+
+    submitReviewAndCloseModal() {
+      this.submitReview();
+      this.closeModal();
+    },
+  
+
+  beforeDestroy() {
+    // If the review modal is being closed, reload the page
+    if (this.isReviewModal) {
+      window.location.reload();
     }
-    
+  },
+
+    submitReview() {
+      const reviewData = {
+        doctor_id: this.doctor.id,
+        name: this.reviewName,
+        text: this.reviewText,
+        stars: this.reviewStars,
+      };
+
+      // Make an API call to send the review to the backend
+      axios.post(`${this.baseUrl}/api/review`, reviewData)
+        .then(() => {
+          // Show a success message or perform other actions after successful submission
+          this.isReviewModal = true;
+          this.successMessage = 'Review sent successfully!';
+          this.showModal();
+          // Clear the review form data after successful submission
+          this.reviewName = '';
+          this.reviewText = '';
+          this.reviewStars = null;
+        })
+        
+    },
+    formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+    return new Date(date).toLocaleDateString(undefined, options);
+  }
 }
 }
 </script>
@@ -87,14 +153,26 @@ methods:{
     </div>
     <!-- <a href="" class="btn btn-warning" @click.prevent="goBack">Go Back</a> -->
     <div class="container">
-        <h2>Reviews per il dottor {{ doctor.name }} {{ doctor.lastname }}</h2>
-        <div class="card" v-for="(elem, index) in doctor.reviews" :key="index">
-            <h5>{{ elem.name }} {{ elem.lastname }}</h5>
-            <p>{{ elem.text }}</p>
-            <p>{{ elem.stars }}</p>
-
-        </div>
-    </div>
+    <h2>Reviews per il dottor {{ doctor.name }} {{ doctor.lastname }}</h2>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Text</th>
+      <th scope="col">Stars</th>
+      <th scope="col">Created At</th> <!-- Add the Created At column header -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(review, index) in doctor.reviews" :key="index">
+      <td>{{ review.name }} {{ review.lastname }}</td>
+      <td>{{ review.text }}</td>
+      <td>{{ review.stars }}</td>
+      <td>{{ formatDate(review.created_at) }}</td> <!-- Display the formatted created_at value -->
+    </tr>
+  </tbody>
+</table>
+</div>
     <div class="wrapper">
         <div class="container container_form">
             <div class="row h-100">
@@ -113,7 +191,7 @@ methods:{
                                     placeholder="Enter your First Name ">
                             </div>
                             <div class="">
-                                <label for="last_name" class="form-label p-2">last Name</label>
+                                <label for="last_name" class="form-label p-2">Last Name</label>
                                 <input v-model="lastname" type="text" name="lastname" class="form-control p-2" id="last_name"
                                     placeholder="Enter your Last Name ">
                             </div>
@@ -131,9 +209,62 @@ methods:{
             </div>
         </div>
     </div>
+    <div class="wrapper">
+        <div class="container container_form">
+            <h2>Add Review for Dr. {{ doctor.name }} {{ doctor.lastname }}</h2>
+            <div class="row h-100">
+                <div class="card_img"></div>
+                <div class="form p-3">
+                    <form class="w-100" @submit.prevent="submitReview()">
+                        <div class="mb-3">
+                          <label for="reviewName" class="form-label p-2">Name</label>
+                          <input v-model="reviewName" type="text" name="reviewName" class="form-control p-2" id="reviewName" placeholder="Enter your Name">
+                        </div>
+                        <div class="mb-3">
+                          <label for="reviewText" class="form-label p-2">Review</label>
+                          <textarea v-model="reviewText" class="form-control p-2" name="reviewText" id="reviewText" rows="5" placeholder="Enter your Review"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewStars" class="form-label p-2">Stars</label>
+                            <div class="stars">
+                                <span class="star" v-for="star in 5" :key="star" @click="reviewStars = star">
+                                    <i class="star-icon fa fa-star" :style="{ color: star <= reviewStars ? 'gold' : 'gray' }"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                          <button type="submit" class="btn btn-primary">Submit Review</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" ref="modal">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Success</h5>
+            <button type="button" class="close" @click="closeModal">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>{{ successMessage }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="closeModal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
 </template>
 
 <style lang="scss" scoped>
+.star-icon {
+  font-size: 24px; /* Adjust the font size to change the size of the stars */
+}
 .wrapper {
     background-image: url(https://assets.nicepagecdn.com/11a8ddce/4072348/images/13808841.jpg);
     background-size: cover;
