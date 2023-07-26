@@ -52,6 +52,87 @@ export default {
                 </div>
             </div>
         </div>
+    </div>
+
+    
+        <section class="piataforma">
+            <div class="container">
+                <h2>Una piattaforma di telemedicina a misura di utente!</h2>
+                <div class="d-md-flex d-lg-flex teleconsulto border border-danger">
+                    <div class="teleconsulto-text  border border-warning">
+                        <h3>Teleconsulto prioritario</h3>
+                        <p>
+                            <b>Hai bisogno di un consulto in tempi rapidi?</b>
+                            Doctorium è la piattaforma di telemedicina che ti permette di effettuare un teleconsulto in
+                            brevissimo
+                            tempo. Non trovi l’appuntamento più adatto a te? Richiedine uno prioritario! I nostri specialisti lo
+                            creeranno appositamente per te e potrai effettuarlo anche oggi stesso. Inoltre, se lo specialista è
+                            disponibile, potrai richiedere un consulto immediato.
+                        </p>
+                    </div>
+                    <div class="teleconsulto-img  border border-info">
+                        <img src="https://images01.nicepagecdn.com/c461c07a441a5d220e8feb1a/74f83172c22f57878677993f/gf.jpg"
+                            alt="foto" width="100%">
+                    </div>
+                </div>
+                <div class="d-flex  telemontaggio">
+
+                    <div class="telemontaggio-img">
+                        <img src="https://images01.nicepagecdn.com/c461c07a441a5d220e8feb1a/74f83172c22f57878677993f/gf.jpg"
+                            alt="foto" width="100%">
+                    </div>
+                    <div class="telemontaggio-text">
+                        <h3>Telemonitoraggio</h3>
+                        <p>
+                            <b>Misura i tuoi parametri vitali e condividili con uno specialista.</b>
+                            Abbonati al servizio di Telemedicina, riceverai al tuo domicilio un kit con strumenti e dispositivi
+                            per
+                            il telemonitoraggio dei tuoi parametri vitali. Dopo ogni misurazione i dati verranno caricati
+                            automaticamente sulla piattaforma ed elaborati sotto forma di un grafico. Inoltre, potrai
+                            condividerli
+                            con lo specialista durante la tua televisita.
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex  documenti">
+                    <div class="documenti-text">
+                        <h3>Referti online e documenti clinici</h3>
+                        <p>
+                            <b>Carica i tuoi referti online.</b>
+                            Con Doctorium puoi caricare i tuoi documenti clinici sulla piattaforma e mostrali allo specialista.
+                            Hai
+                            a disposizione un ampio spazio dove caricare documenti clinici o immagini radiologiche come TC, RM,
+                            RX
+                            ecc. Lo specialista, durante il videoconsulto potrà vederli e commentarli con te.
+                        </p>
+                    </div>
+                    <div class="documenti-img">
+                        <img src="https://images01.nicepagecdn.com/c461c07a441a5d220e8feb1a/74f83172c22f57878677993f/gf.jpg"
+                            alt="foto" width="100%">
+                    </div>
+                </div>
+                <div class=" d-flex ricette">
+                    <div class="ricette-img">
+                        <img src="https://t4.ftcdn.net/jpg/04/56/70/85/240_F_456708586_72teUO1RFqXQay9OmztRvEgZDBQMPDyw.jpg"
+                            alt="foto">
+                    </div>
+                    <div class="ricette-text">
+                        <h3>Ricette mediche online</h3>
+                        <p><b>Concentrati solo su di te.</b>
+                            Durante il teleconsulto concentrati non dovrai preoccuparti di prendere appunti perché alla fine del
+                            consulto riceverai un riepilogo scritto, firmato digitalmente dal dottore, che potrai stampare o
+                            condividere. Inoltre, qualora lo specialista lo ritenesse necessario, potrà allegare una ricetta
+                            medica
+                            o una prescrizione per farmaci online.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    
+    <div class="sfondo">
         <main class="container">
             <div class="mb-3 ">
                 <h2 id="ancor-spec" class="text-center p-5">Specializzazioni</h2>  

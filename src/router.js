@@ -3,6 +3,7 @@ import AppHome from './pages/AppHome.vue';
 // import ProjectList from './pages/ProjectList.vue';
 import SingleDoctor from './pages/SingleDoctor.vue';
 import NotFound from './pages/NotFound.vue';
+import AppAbout from './pages/AppAbout.vue';
 // import Contacts from './pages/Contacts.vue';
 // import About from './pages/About.vue';
 import AdvancedResearch from './pages/AdvancedResearch.vue';
@@ -18,6 +19,11 @@ routes: [
         path: '/specializations',
         name: 'AdvancedResearch',
         component: AdvancedResearch
+    },
+    {
+        path: '/about-us',
+        name: 'AppAbout',
+        component: AppAbout
     },
     {
         path: '/doctors/:slug',
