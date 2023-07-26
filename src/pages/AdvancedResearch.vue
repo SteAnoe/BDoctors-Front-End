@@ -111,7 +111,7 @@ export default {
               <option value="average_vote">Sort by Average Vote</option>
             </select>
         </div>
-        <div></div>
+        <div>
             
             <div class="card" v-for="(doctor, index) in doctors" :key="index">
                 <h2>{{ doctor.name }}</h2>
