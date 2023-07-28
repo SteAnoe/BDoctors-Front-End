@@ -1,10 +1,11 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+import AppFooter from '../components/AppFooter.vue';
 export default {
     name: 'app',
     components: {
-
+        AppFooter,
     },
     data() {
         return {
@@ -37,178 +38,209 @@ export default {
 }
 </script>
 <template>
-    <div class="sfondo">
-        <div class="jumbotron">
+    <div class="wrapper">
+        <section class="jumbotron pt-5">
             <div class="container ">
-                <div class="d-lg-flex jumbo-container">
-                    <div class="testo-jumbo col-sm-12 col-md-6 col-lg-6">
-                        <h1>BDoctors, soddisfatti e in salute</h1>
-                        <p class="py-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel incidunt nihil et
-                            tempora quae, autem doloremque eaque necessitatibus molestiae. At odit expedita vitae sed ex
-                            quam ut ad ipsa minima.</p>
-                        <a href="#ancor-spec" class="btn btn-primary text-uppercase">Inizia ricerca</a>
+                <div class=" d-md-flex d-lg-flex jumbo-container">
+                    <div class="testo-jumbo col-12 col-sm-12 col-md-6 col-lg-5">
+                        <h1>BDoctors</h1>
+                        <p class="py-3">Su BDoctors trovi i migliori specialisti in tutti i campi della Medicina. Se
+                            desideri effettuare una Televisita o ricevere un secondo parere su una diagnosi già fatta, puoi
+                            cercare un dottore online tra i nostri medici di fiducia.</p>
+                        <a href="#ancor-spec" class="btn btn-primary px-5 text-uppercase">Inizia ricerca</a>
                     </div>
-                    <div class="img-jumbo col-sm-12 col-md-6 col-lg-6">
-                        <img class=""
-                            src="https://th.bing.com/th/id/R.18e073d15ff7a4b3356c575e945b938a?rik=J00q%2btrg070fTQ&pid=ImgRaw&r=0"
+                    <div class="img-jumbo col-12 col-sm-12 col-md-8 col-lg-6 px-2">
+                        <!-- <img class=""
+                            src="https://www.nicepng.com/png/full/47-478903_transparent-background-doctors-clipart.png"
+                            alt=""> -->
+                        <img src="https://medicopress.media/wp-content/uploads/2017/02/homepage_vector_doctors-02.png"
                             alt="">
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-
-    <section class="piattaforma">
-        <div class="container">
-            <h2>Una piattaforma di telemedicina a misura di utente!</h2>
-            <div class="d-md-flex d-lg-flex teleconsulto">
-                <div class="teleconsulto-text">
-                    <h3>Teleconsulto prioritario</h3>
-                    <p>
-                        <b>Hai bisogno di un consulto in tempi rapidi?</b>
-                        Doctorium è la piattaforma di telemedicina che ti permette di effettuare un teleconsulto in
-                        brevissimo
-                        tempo. Non trovi l’appuntamento più adatto a te? Richiedine uno prioritario! I nostri specialisti lo
-                        creeranno appositamente per te e potrai effettuarlo anche oggi stesso. Inoltre, se lo specialista è
-                        disponibile, potrai richiedere un consulto immediato.
-                    </p>
-                </div>
-                <div class="teleconsulto-img">
-                    <img src="https://img.freepik.com/free-vector/online-doctor-concept_23-2148506884.jpg?w=2000" alt="foto"
-                        width="100%">
-                </div>
-            </div>
-            <div class="d-md-flex d-lg-flex  telemontaggio">
-
-                <div class="telemontaggio-img">
-                    <img src="https://img.freepik.com/free-vector/online-doctor-talking-patient_23-2148509191.jpg"
-                        alt="foto" width="100%">
-                </div>
-                <div class="telemontaggio-text">
-                    <h3>Telemonitoraggio</h3>
-                    <p>
-                        <b>Misura i tuoi parametri vitali e condividili con uno specialista.</b>
-                        Abbonati al servizio di Telemedicina, riceverai al tuo domicilio un kit con strumenti e dispositivi
-                        per
-                        il telemonitoraggio dei tuoi parametri vitali. Dopo ogni misurazione i dati verranno caricati
-                        automaticamente sulla piattaforma ed elaborati sotto forma di un grafico. Inoltre, potrai
-                        condividerli
-                        con lo specialista durante la tua televisita.
-                    </p>
-                </div>
-            </div>
-            <div class="d-md-flex d-lg-flex  documenti">
-                <div class="documenti-text">
-                    <h3>Referti online e documenti clinici</h3>
-                    <p>
-                        <b>Carica i tuoi referti online.</b>
-                        Con Doctorium puoi caricare i tuoi documenti clinici sulla piattaforma e mostrali allo specialista.
-                        Hai
-                        a disposizione un ampio spazio dove caricare documenti clinici o immagini radiologiche come TC, RM,
-                        RX
-                        ecc. Lo specialista, durante il videoconsulto potrà vederli e commentarli con te.
-                    </p>
-                </div>
-                <div class="documenti-img">
-                    <img src="https://img.freepik.com/free-vector/medical-professionals-watching-webinar-online-platform-people-having-virtual-class-flat-illustration_74855-16906.jpg?t=st=1690445211~exp=1690445811~hmac=598d127874c5fe00c28e5d2b45f9b034fa5fac47d1ffb9e356c627adcc9d05c9"
-                        alt="foto" width="100%">
-                </div>
-            </div>
-            <div class="d-md-flex d-lg-flex ricette">
-                <div class="ricette-img">
-                    <img src="https://t4.ftcdn.net/jpg/04/56/70/85/240_F_456708586_72teUO1RFqXQay9OmztRvEgZDBQMPDyw.jpg"
-                        alt="foto">
-                </div>
-                <div class="ricette-text">
-                    <h3>Ricette mediche online</h3>
-                    <p><b>Concentrati solo su di te.</b>
-                        Durante il teleconsulto concentrati non dovrai preoccuparti di prendere appunti perché alla fine del
-                        consulto riceverai un riepilogo scritto, firmato digitalmente dal dottore, che potrai stampare o
-                        condividere. Inoltre, qualora lo specialista lo ritenesse necessario, potrà allegare una ricetta
-                        medica
-                        o una prescrizione per farmaci online.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-
-    <div class="sfondo">
-        <main class="container">
-            <div class="mb-3 ">
-                <h2 id="ancor-spec" class="text-center p-5">Specializzazioni</h2>
-                <div class="md-3 content-card">
-                    <div class=" col-lg-3 col-md-4 col-sm-6 col-12 " v-for="(elem, index) in specializations" :key="index">
-                        <router-link class="custom-link" :to="{ name: 'AdvancedResearch', query: { slug: elem.slug } }"
-                            @click="selectSpecialization(specializations.slug)">
-                            <div class="div-img card specializazioni">
-                                <img :src="elem.img" alt="">
-                                <p>
-                                    {{ elem.name }}
-                                </p>
-                            </div>
-                        </router-link>
+        </section>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#22C1C3" fill-opacity="1"
+                d="M0,224L34.3,202.7C68.6,181,137,139,206,128C274.3,117,343,139,411,122.7C480,107,549,53,617,58.7C685.7,64,754,128,823,144C891.4,160,960,128,1029,138.7C1097.1,149,1166,203,1234,218.7C1302.9,235,1371,213,1406,202.7L1440,192L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z">
+            </path>
+        </svg>
+        <section class="piattaforma">
+            <div class="container">
+                <h2>Una piattaforma di telemedicina a misura di utente!</h2>
+                <div class="d-md-flex d-lg-flex teleconsulto">
+                    <div class="teleconsulto-text col-12 col-sm-12 col-md-6 col-lg-5">
+                        <h3>Teleconsulto prioritario</h3>
+                        <p>
+                            <b>Hai bisogno di un consulto in tempi rapidi?</b>
+                            Doctorium è la piattaforma di telemedicina che ti permette di effettuare un teleconsulto in
+                            brevissimo
+                            tempo. Non trovi l’appuntamento più adatto a te? Richiedine uno prioritario! I nostri
+                            specialisti lo
+                            creeranno appositamente per te e potrai effettuarlo anche oggi stesso. Inoltre, se lo
+                            specialista è
+                            disponibile, potrai richiedere un consulto immediato.
+                        </p>
+                    </div>
+                    <div class="teleconsulto-img col-12 col-sm-12 col-md-6 col-lg-5">
+                        <img src="https://img.freepik.com/free-vector/online-doctor-concept_23-2148506884.jpg?w=2000"
+                            alt="foto" width="100%">
                     </div>
                 </div>
+                <div class="d-md-flex d-lg-flex  telemontaggio">
+
+                    <div class="telemontaggio-img col-12 col-sm-12 col-md-6 col-lg-5">
+                        <img src="https://img.freepik.com/free-vector/online-doctor-talking-patient_23-2148509191.jpg"
+                            alt="foto" width="100%">
+                    </div>
+                    <div class="telemontaggio-text col-12 col-sm-12 col-md-6 col-lg-5">
+                        <h3>Telemonitoraggio</h3>
+                        <p>
+                            <b>Misura i tuoi parametri vitali e condividili con uno specialista.</b>
+                            Abbonati al servizio di Telemedicina, riceverai al tuo domicilio un kit con strumenti e
+                            dispositivi
+                            per
+                            il telemonitoraggio dei tuoi parametri vitali. Dopo ogni misurazione i dati verranno caricati
+                            automaticamente sulla piattaforma ed elaborati sotto forma di un grafico. Inoltre, potrai
+                            condividerli
+                            con lo specialista durante la tua televisita.
+                        </p>
+                    </div>
+                </div>
+                <div class="d-md-flex d-lg-flex  documenti">
+                    <div class="documenti-text col-12 col-sm-12 col-md-6 col-lg-5">
+                        <h3>Referti online e documenti clinici</h3>
+                        <p>
+                            <b>Carica i tuoi referti online.</b>
+                            Con Doctorium puoi caricare i tuoi documenti clinici sulla piattaforma e mostrali allo
+                            specialista.
+                            Hai
+                            a disposizione un ampio spazio dove caricare documenti clinici o immagini radiologiche come TC,
+                            RM,
+                            RX
+                            ecc. Lo specialista, durante il videoconsulto potrà vederli e commentarli con te.
+                        </p>
+                    </div>
+                    <div class="documenti-img col-12 col-sm-12 col-md-6 col-lg-5">
+                        <img src="https://img.freepik.com/free-vector/medical-professionals-watching-webinar-online-platform-people-having-virtual-class-flat-illustration_74855-16906.jpg?t=st=1690445211~exp=1690445811~hmac=598d127874c5fe00c28e5d2b45f9b034fa5fac47d1ffb9e356c627adcc9d05c9"
+                            alt="foto" width="100%">
+                    </div>
+                </div>
+                <div class="d-md-flex d-lg-flex ricette">
+                    <div class="ricette-img col-12 col-sm-12 col-md-6 col-lg-5">
+                        <img src="https://t4.ftcdn.net/jpg/04/56/70/85/240_F_456708586_72teUO1RFqXQay9OmztRvEgZDBQMPDyw.jpg"
+                            alt="foto">
+                    </div>
+                    <div class="ricette-text col-12 col-sm-12 col-md-6 col-lg-5">
+                        <h3>Ricette mediche online</h3>
+                        <p><b>Concentrati solo su di te.</b>
+                            Durante il teleconsulto concentrati non dovrai preoccuparti di prendere appunti perché alla fine
+                            del
+                            consulto riceverai un riepilogo scritto, firmato digitalmente dal dottore, che potrai stampare o
+                            condividere. Inoltre, qualora lo specialista lo ritenesse necessario, potrà allegare una ricetta
+                            medica
+                            o una prescrizione per farmaci online.
+                        </p>
+                    </div>
+
+                </div>
             </div>
-        </main>
+        </section>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#E7F0FF" fill-opacity="1"
+                d="M0,96L30,117.3C60,139,120,181,180,192C240,203,300,181,360,192C420,203,480,245,540,240C600,235,660,181,720,149.3C780,117,840,107,900,122.7C960,139,1020,181,1080,202.7C1140,224,1200,224,1260,208C1320,192,1380,160,1410,144L1440,128L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z">
+            </path>
+        </svg>
+        <section class="specializzazioni-sfondo">
+            <main class="container">
+                <div class="pb-3 ">
+                    <h2 id="ancor-spec" class="text-center p-5">Specializzazioni</h2>
+                    <div class="md-3 content-card">
+                        <div class=" col-lg-3 col-md-4 col-sm-6 col-12 " v-for="(elem, index) in specializations"
+                            :key="index">
+                            <router-link class="custom-link" :to="{ name: 'AdvancedResearch', query: { slug: elem.slug } }"
+                                @click="selectSpecialization(specializations.slug)">
+                                <div class="div-img card specializazioni">
+                                    <img :src="elem.img" alt="">
+                                    <p>
+                                        {{ elem.name }}
+                                    </p>
+                                </div>
+                            </router-link>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </section>
+        <AppFooter></AppFooter>
     </div>
 </template>
 <style lang="scss" scoped>
-.sfondo {
-    background-color: #e7f0ff;
+svg {
+    margin-top: -2px;
+    margin-bottom: -2px;
+}
 
-    .jumbotron {
-        background: rgb(34, 193, 195);
-        background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(3, 150, 166, 1) 65%);
-        color: white;
-
-
-        .jumbo-container {
-            align-items: center;
-            justify-content: center;
+.jumbotron {
+    background: rgb(34, 193, 195);
+    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(3, 150, 166, 1) 65%);
+    color: white;
 
 
-            .testo-jumbo {
-                width: 45%;
-                padding: 100px 0;
 
-                h1 {
-                    font-size: 4rem;
-                }
+    .jumbo-container {
+        align-items: center;
+        justify-content: center;
 
-                p {
-                    font-size: 1.50rem;
-                }
 
-                .btn {
-                    font-size: 1.50rem;
-                    padding: 1rem 1.5rem;
-                    border-radius: 25px;
-                    border: 0;
-                    background-color: rgb(0, 144, 160);
-                }
+        .testo-jumbo {
+            // width: 50%;
+            padding: 100px 0;
+
+            h1 {
+                font-size: 4rem;
+                letter-spacing: 5px;
 
             }
 
-            .img-jumbo {
-                width: 45%;
+            p {
+                font-size: 1.4rem;
+                font-weight: 100;
+                line-height: 48px;
+            }
+
+            .btn {
+                font-size: 1.50rem;
+                padding: 1rem 1.5rem;
+                border-radius: 25px;
+                border: 0;
+                background-color: rgb(0, 144, 160);
+            }
+
+        }
+
+        .img-jumbo {
+            // width: 50%;
 
 
-                img {
-                    width: 100%;
-
-                }
+            img {
+                width: 100%;
+                display: block;
 
             }
+
         }
     }
+}
+
+.specializzazioni-sfondo {
+    background-color: #e7f0ff;
+    padding-bottom: 50px;
 
     h2 {
         color: #E3B14E;
+        text-align: center;
+        font-size: 2.2rem;
+        letter-spacing: 8px;
     }
 
     .content-card {
@@ -248,16 +280,24 @@ export default {
             }
         }
     }
+
 }
 
 .piattaforma {
+
+    h2 {
+        text-align: center;
+        font-size: 2.2rem;
+        letter-spacing: 8px;
+    }
+
     .teleconsulto {
         align-items: center;
         justify-content: space-around;
 
         .teleconsulto-img {
             margin: 20px;
-            width: 40%;
+
 
             img {
                 border-radius: 50%;
@@ -268,7 +308,17 @@ export default {
         }
 
         .teleconsulto-text {
-            width: 60%;
+            line-height: 34px;
+            font-size: 1rem;
+
+            h3 {
+                letter-spacing: 8px;
+                font-weight: 200;
+            }
+
+            b {
+                color: #007e8c;
+            }
         }
     }
 
@@ -278,7 +328,7 @@ export default {
 
         .telemontaggio-img {
             margin: 20px;
-            width: 40%;
+
 
 
             img {
@@ -291,8 +341,17 @@ export default {
         }
 
         .telemontaggio-text {
-            width: 60%;
+            line-height: 34px;
+            font-size: 1rem;
 
+            h3 {
+                letter-spacing: 8px;
+                font-weight: 200;
+            }
+
+            b {
+                color: #007e8c;
+            }
         }
     }
 
@@ -302,7 +361,6 @@ export default {
 
         .documenti-img {
             margin: 20px;
-            width: 40%;
 
             img {
 
@@ -312,7 +370,17 @@ export default {
         }
 
         .documenti-text {
-            width: 60%;
+            line-height: 34px;
+            font-size: 1rem;
+
+            h3 {
+                letter-spacing: 8px;
+                font-weight: 200;
+            }
+
+            b {
+                color: #007e8c;
+            }
         }
     }
 
@@ -323,21 +391,28 @@ export default {
 
         .ricette-img {
             margin: 20px;
-            width: 40%;
+
 
 
             img {
                 border-radius: 50%;
                 // display: block;
-
                 width: 100%;
-
             }
         }
 
         .ricette-text {
-            width: 60%;
+            line-height: 34px;
+            font-size: 1rem;
 
+            h3 {
+                letter-spacing: 8px;
+                font-weight: 200;
+            }
+
+            b {
+                color: #007e8c;
+            }
         }
     }
 
