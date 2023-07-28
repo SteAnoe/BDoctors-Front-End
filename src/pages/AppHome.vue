@@ -12,9 +12,11 @@ export default {
             store,
             baseUrl: 'http://127.0.0.1:8000',
             specializations: null,
+            doctors: [],
         }
     },
     created() {
+        this.fetchDoctorsWithSponsorship();
     },
     computed: {
     },
@@ -26,14 +28,24 @@ export default {
     methods: {
         getApiSpecializations() {
             axios.get(`${this.baseUrl}/api/specializations`)
-                .then(res => {
-                    this.specializations = res.data.specializations
-                })
+            .then(res => {
+                this.specializations = res.data.specializations
+            })
         },
 
         selectSpecialization(slug) {
             this.selectedSpecializationSlug = slug;
         },
+        fetchDoctorsWithSponsorship() {
+          axios.get(`${this.baseUrl}/api/doctors-with-sponsorship`)
+            .then((response) => {
+                this.doctors = response.data.doctors;
+                console.log(this.doctors)
+            })
+            .catch((error) => {
+              console.error('Error fetching doctors with sponsorship:', error);
+            });
+        }
     }
 }
 </script>
@@ -64,6 +76,14 @@ export default {
                 d="M0,224L34.3,202.7C68.6,181,137,139,206,128C274.3,117,343,139,411,122.7C480,107,549,53,617,58.7C685.7,64,754,128,823,144C891.4,160,960,128,1029,138.7C1097.1,149,1166,203,1234,218.7C1302.9,235,1371,213,1406,202.7L1440,192L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z">
             </path>
         </svg>
+        <div>
+            <h1>Doctors with Active Sponsorship</h1>
+            <ul>
+                <li v-for="doctor in doctors" :key="doctor.id">
+                    <h2>{{ doctor.name }}</h2>
+                </li>
+            </ul>
+        </div>
         <section class="piattaforma">
             <div class="container">
                 <h2>Una piattaforma di telemedicina a misura di utente!</h2>

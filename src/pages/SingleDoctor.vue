@@ -21,6 +21,10 @@ export default {
   },
   created() {
     this.getSingleDoctor();
+    
+  },
+  mounted(){
+    this.addActiveClassToFirstChild()
   },
   methods: {
     goBack() {
@@ -73,7 +77,6 @@ export default {
       this.$refs.modal.classList.add('show');
       this.$refs.modal.style.display = 'block';
     },
-
     closeModal() {
       this.$refs.modal.classList.remove('show');
       this.$refs.modal.style.display = 'none';
@@ -85,13 +88,10 @@ export default {
       this.submitMessage();
       this.closeModal();
     },
-
     submitReviewAndCloseModal() {
       this.submitReview();
       this.closeModal();
     },
-
-
     beforeDestroy() {
       // If the review modal is being closed, reload the page
       if (this.isReviewModal) {
@@ -124,34 +124,47 @@ export default {
     formatDate(date) {
       const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
       return new Date(date).toLocaleDateString(undefined, options);
+    },
+    addActiveClassToFirstChild(){
+      let parentDiv = document.querySelector('.carousel-inner');
+      let firstChild = parentDiv.firstElementChild;
+      let allChildren = parentDiv.children;
+      for (let i = 0; i < allChildren.length; i++) {
+        allChildren[i].classList.remove('active');
+      }
+      if (firstChild) {
+        firstChild.classList.add('active');
+      }
     }
   }
 }
 </script>
 
 <template>
-  <section class="doctor container my-5 h-40">
-    <h3 class="fs-2 text-center ">{{ doctor.name }} {{ doctor.lastname }}</h3>
-    <div class="row justify-content-center align-items-center">
-      <div class="col-12 col-md-4 my-2 img-dottore justify-content-center align-items-center d-flex">
-        <img class="img-medico py-5 h-75 d-inline-block rounded-circle"
-          :src="`${baseUrl}/storage/${this.doctor.photo}` != 'null' ? `${baseUrl}/storage/${this.doctor.photo}` : `https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg`"
-          alt="foto">
-      </div>
-      <div class="col-12 col-md-4 my-2 spec-dottore ">
-        <ul class="card-text">
-          <h5 class="text-bold">Medico specializzato in:</h5>
-          <li v-for="(elem, index) in doctor.specializations" :key="index">{{ elem.name }}</li>
-        </ul>
-        <div><strong>Numero di telefono:</strong> {{ doctor.phone }}</div>
-        <div><strong>Email:</strong> {{ doctor.email }}</div>
-        <div><strong>Indirizzo:</strong> {{ doctor.address }}</div>
-      </div>
-      <div class="col-12 col-md-4 my-2 desc-dottore ">
-        <h5 class="text-bold">Descrizione:</h5>
-        <p>{{ doctor.description }}</p>
-
-
+  <section class="doctor py-5">
+    <div class="card container my-5 h-40">
+      <h3 class="fs-2 my-4 text-center ">{{ doctor.name }} {{ doctor.lastname }}</h3>
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-4  img-dottore justify-content-center align-items-center d-flex">
+          <img class="img-medico my-3 h-75 d-inline-block "
+            :src="`${baseUrl}/storage/${this.doctor.photo}` != `${baseUrl}/storage/null` ? `${baseUrl}/storage/${this.doctor.photo}` : `https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg`"
+            alt="foto">
+        </div>
+        <div class="col-12 col-md-4  spec-dottore ">
+          <ul class="card-text">
+            <h5 class="text-bold">Medico specializzato in:</h5>
+            <li v-for="(elem, index) in doctor.specializations" :key="index">{{ elem.name }}</li>
+          </ul>
+          <div><strong>Numero di telefono:</strong> {{ doctor.phone }}</div>
+          <div><strong>Email:</strong> {{ doctor.email }}</div>
+          <div><strong>Indirizzo:</strong> {{ doctor.address }}</div>
+        </div>
+        <div class="col-12 col-md-4  desc-dottore ">
+          <h5 class="text-bold">Descrizione:</h5>
+          <p>{{ doctor.description }}</p>
+  
+  
+        </div>
       </div>
     </div>
 
@@ -249,8 +262,6 @@ export default {
     </div>
   </div>
 
-
-
   <!-- <div class="wrapper">
         <div class="container container_form">
             <h2>Add Review for Dr. {{ doctor.name }} {{ doctor.lastname }}</h2>
@@ -283,12 +294,13 @@ export default {
         </div>
     </div> -->
   <section class="container carousel-container">
+    <h3 class="text-center">Le recensioni di {{ doctor.name }} {{ doctor.lastname }}</h3>
     <div id="carouselExampleRide" class="carousel slide " data-bs-ride="true">
       <div class="carousel-inner py-2">
-        <div class="carousel-item card p-3 active" style="width: 40rem;">
+        <!-- <div class="carousel-item card p-3 active col-12 col-md-4" >
           Guarda cosa ne pensano i nostri clienti di {{ doctor.name }} {{ doctor.lastname }}
-        </div>
-        <div class="carousel-item card p-3" style="width: 40rem;" v-for="(review, index) in doctor.reviews" :key="index">
+        </div> -->
+        <div class="carousel-item card p-3 col-12 col-md-4 "   v-for="(review, index) in doctor.reviews" :key="index">
           <p class="fw-bold">{{ review.name }} {{ review.lastname }}</p>
           <p>{{ review.text }}</p>
           <div>
@@ -407,10 +419,13 @@ ul {
   list-style-type: none;
   padding-left: 0;
 }
-
-.img-medico {
-  max-width: 80%;
-  max-height: 40%;
+.doctor{
+  background-color: #E7F0FF;
+  .img-medico {
+    max-width: 80%;
+    max-height: 400px;
+    padding: 0;
+  }
 }
 
 .write-review {

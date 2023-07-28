@@ -12,13 +12,10 @@ export default {
             baseUrl: 'http://127.0.0.1:8000',
             doctors: [],
             specializations: null,
-
             minVoteFilter: 0,
-            currentPage: 1,
             lastPage: null,
             sortingOption: 'null',
-            sortBy: null,
-
+            sortBy: null, 
         }
     },
     created() {
@@ -27,7 +24,7 @@ export default {
     computed: {
     },
     mounted() {
-        this.fetchDoctors();
+        this.fetchDoctors(); 
     },
     watch: {
         sortingOption: {
@@ -36,51 +33,48 @@ export default {
         },
     },
     methods: {
-        fetchDoctors(doctorApiPage) {
-            const specializationSlug = this.$route.query.slug;
-            const minVoteFilter = this.minVoteFilter;
-            const sortBy = this.sortBy;
+        fetchDoctors(pageNumber) {
+        const specializationSlug = this.$route.query.slug;
+        const minVoteFilter = this.minVoteFilter;
+        const sortBy = this.sortBy;
 
-            const params = {};
+        const params = {};
 
-            if (specializationSlug) {
-                params.slug = specializationSlug;
-            }
+        if (specializationSlug) {
+          params.slug = specializationSlug;
+        }
 
-            if (minVoteFilter) {
-                params.minVoteFilter = minVoteFilter;
-            }
+        if (minVoteFilter) {
+          params.minVoteFilter = minVoteFilter;
+        }
 
-            if (sortBy) {
-                params.sortBy = sortBy;
-            }
-            if (doctorApiPage) {
-                params.page = doctorApiPage;
-            }
-            if (specializationSlug) {
-                axios.get(`${this.baseUrl}/api/specializations/${specializationSlug}`, { params })
-                    .then((res) => {
-                        console.log(res.data)
-                        this.doctors = res.data.doctors.data;
-                        this.currentPage = res.data.doctors.current_page;
-                        this.lastPage = res.data.doctors.last_page;
-                    })
-                    .catch((error) => {
-                        console.error('Error fetching doctors:', error);
-                    });
-            } else {
-                axios.get(`${this.baseUrl}/api/doctors`)
-                    .then((res) => {
-                        console.log(res)
-                        this.doctors = res.data.doctors.data;
-                        this.currentPage = res.data.doctors.current_page;
-                        this.lastPage = res.data.doctors.last_page;
-                    })
-                    .catch((error) => {
-                        console.error('Error fetching doctors:', error);
-                    });
-            }
+        if (sortBy) {
+          params.sortBy = sortBy;
+        }
+
+        if (specializationSlug) {
+          axios.get(`${this.baseUrl}/api/specializations/${specializationSlug}`, { params })
+            .then((res) => {
+              console.log(res.data.doctors);
+              this.doctors = res.data.doctors;
+
+            })
+            .catch((error) => {
+              console.error('Error fetching doctors:', error);
+            });
+        } else {
+          axios.get(`${this.baseUrl}/api/doctors`)
+            .then((res) => {
+              console.log(res);
+              this.doctors = res.data.doctors;
+
+            })
+            .catch((error) => {
+              console.error('Error fetching doctors:', error);
+            });
+        }
         },
+
 
         applyFilter() {
             this.fetchDoctors();
@@ -126,7 +120,8 @@ export default {
                     <div class="d-lg-flex align-items-center justify-content-center">
 
                         <div class="img-dott col-lg-6">
-                            <img src="https://t4.ftcdn.net/jpg/01/22/08/35/360_F_122083515_l2NbdWla7e38dCtAq8aXHgNLLE7AwrzX.jpg"
+                            <img
+                            :src="`photo/${this.doctors.photo}` != `photo/undefined` ? `photo/${this.doctors.photo}` : `https://t4.ftcdn.net/jpg/01/22/08/35/360_F_122083515_l2NbdWla7e38dCtAq8aXHgNLLE7AwrzX.jpg`" 
                                 alt="" class="rounded-circle">
                         </div>
 
@@ -142,27 +137,15 @@ export default {
                                 <li v-for="(specialization, index) in doctor.specializations" :key="index">{{
                                     specialization.name }}</li>
                             </ul>
+                            <div v-if="doctor.active_sponsorship">
+                                <p><strong>Sponsored</strong></p>
+                            </div>
                         </div>
 
                     </div>
                 </div>
             </div>
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" @click.prevent="fetchDoctors(currentPage - 1)" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item" v-for="(elem, index) in lastPage" :key="index"
-                    :class="(currentPage === elem) ? 'active' : ''">
-                    <a class="page-link" href="#" @click.prevent="fetchDoctors(elem)">{{ elem }}</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" @click.prevent="fetchDoctors(currentPage + 1)" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
+            
 
         </div>
 
