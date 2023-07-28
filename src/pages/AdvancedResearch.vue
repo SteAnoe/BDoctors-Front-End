@@ -155,6 +155,7 @@ export default {
 <style lang="scss" scoped>
 .sfondo {
     background-color: #e7f0ff;
+    margin-top: 56px;
 
     h1,
     h3 {

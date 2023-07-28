@@ -22,10 +22,35 @@ export default {
     },
     mounted() {
         this.getApiSpecializations();
+        this.caroselloSpons()
     },
     watch: {
     },
     methods: {
+        caroselloSpons(){
+            $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            navText: [
+                "<i class='fa fa-caret-left'></i>",
+                "<i class='fa fa-caret-right'></i>"
+            ],
+            autoplay: true,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                items: 1
+                },
+                600: {
+                items: 3
+                },
+                1000: {
+                items: 5
+                }
+            }
+            })
+        },
         getApiSpecializations() {
             axios.get(`${this.baseUrl}/api/specializations`)
             .then(res => {
@@ -51,7 +76,7 @@ export default {
 </script>
 <template>
     <div class="wrapper">
-        <section class="jumbotron pt-5">
+        <section class="jumbotron ">
             <div class="container ">
                 <div class=" d-md-flex d-lg-flex jumbo-container">
                     <div class="testo-jumbo col-12 col-sm-12 col-md-6 col-lg-5">
@@ -76,6 +101,24 @@ export default {
                 d="M0,224L34.3,202.7C68.6,181,137,139,206,128C274.3,117,343,139,411,122.7C480,107,549,53,617,58.7C685.7,64,754,128,823,144C891.4,160,960,128,1029,138.7C1097.1,149,1166,203,1234,218.7C1302.9,235,1371,213,1406,202.7L1440,192L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z">
             </path>
         </svg>
+        <section>
+            <div class="carousel-wrap">
+                <div class="owl-carousel">
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                    <div class="item"><img src="http://placehold.it/150x150"></div>
+                </div>
+            </div>
+        </section>
         <div>
             <h1>Doctors with Active Sponsorship</h1>
             <ul>
@@ -204,12 +247,14 @@ svg {
     background: rgb(34, 193, 195);
     background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(3, 150, 166, 1) 65%);
     color: white;
+    margin-top: 56px;
 
 
 
     .jumbo-container {
         align-items: center;
         justify-content: center;
+        
 
 
         .testo-jumbo {
@@ -302,7 +347,39 @@ svg {
     }
 
 }
+.carousel-wrap {
+  margin: 90px auto;
+  padding: 0 5%;
+  width: 80%;
+  position: relative;
+}
 
+/* fix blank or flashing items on carousel */
+.owl-carousel .item {
+  position: relative;
+  z-index: 100; 
+  -webkit-backface-visibility: hidden; 
+}
+
+/* end fix */
+.owl-nav > div {
+  margin-top: -26px;
+  position: absolute;
+  top: 50%;
+  color: #cdcbcd;
+}
+
+.owl-nav i {
+  font-size: 52px;
+}
+
+.owl-nav .owl-prev {
+  left: -30px;
+}
+
+.owl-nav .owl-next {
+  right: -30px;
+}
 .piattaforma {
 
     h2 {
