@@ -22,54 +22,29 @@ export default {
     },
     mounted() {
         this.getApiSpecializations();
-        this.caroselloSpons()
     },
     watch: {
     },
     methods: {
-        caroselloSpons(){
-            $('.owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            navText: [
-                "<i class='fa fa-caret-left'></i>",
-                "<i class='fa fa-caret-right'></i>"
-            ],
-            autoplay: true,
-            autoplayHoverPause: true,
-            responsive: {
-                0: {
-                items: 1
-                },
-                600: {
-                items: 3
-                },
-                1000: {
-                items: 5
-                }
-            }
-            })
-        },
         getApiSpecializations() {
             axios.get(`${this.baseUrl}/api/specializations`)
-            .then(res => {
-                this.specializations = res.data.specializations
-            })
+                .then(res => {
+                    this.specializations = res.data.specializations
+                })
         },
 
         selectSpecialization(slug) {
             this.selectedSpecializationSlug = slug;
         },
         fetchDoctorsWithSponsorship() {
-          axios.get(`${this.baseUrl}/api/doctors-with-sponsorship`)
-            .then((response) => {
-                this.doctors = response.data.doctors;
-                console.log(this.doctors)
-            })
-            .catch((error) => {
-              console.error('Error fetching doctors with sponsorship:', error);
-            });
+            axios.get(`${this.baseUrl}/api/doctors-with-sponsorship`)
+                .then((response) => {
+                    this.doctors = response.data.doctors;
+                    console.log(this.doctors)
+                })
+                .catch((error) => {
+                    console.error('Error fetching doctors with sponsorship:', error);
+                });
         }
     }
 }
@@ -101,32 +76,43 @@ export default {
                 d="M0,224L34.3,202.7C68.6,181,137,139,206,128C274.3,117,343,139,411,122.7C480,107,549,53,617,58.7C685.7,64,754,128,823,144C891.4,160,960,128,1029,138.7C1097.1,149,1166,203,1234,218.7C1302.9,235,1371,213,1406,202.7L1440,192L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z">
             </path>
         </svg>
-        <section>
-            <div class="carousel-wrap">
-                <div class="owl-carousel">
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                    <div class="item"><img src="http://placehold.it/150x150"></div>
-                </div>
-            </div>
-        </section>
-        <div>
+        <!-- <div>
             <h1>Doctors with Active Sponsorship</h1>
             <ul>
                 <li v-for="doctor in doctors" :key="doctor.id">
                     <h2>{{ doctor.name }}</h2>
                 </li>
             </ul>
-        </div>
+        </div> -->
+        <section class="sponsorship-section">
+            <h2>Dottori in evidenza</h2>
+            <div class=" sponsorship">
+                <div class="s-content">
+                    <div class="t-row">
+
+                        <div v-for="doctor in doctors" :key="doctor.id" class="b-card card" style="width: 18rem;">
+                            <router-link class="sponsorship-link"
+                                :to="{ name: 'SingleDoctor', params: { slug: doctor.slug } }">
+
+                                <!-- <img src="https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg"
+                                    class="" alt="foto"> -->
+                                <!-- <img :src="doctor.photo" alt="foto"> -->
+
+                                <img class="img-medico my-3 h-75 d-inline-block  img-fluid"
+                                    :src="`${baseUrl}/storage/${doctor.photo}` != `${baseUrl}/storage/null` ? `${baseUrl}/storage/${doctor.photo}` : `https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg`"
+                                    alt="foto">
+                                <div class="card-body">
+                                    <h5 class="card-title">DR.{{ doctor.name }} {{ doctor.lastname }}</h5>
+                                    <p class="card-text" v-for="elem in doctor.reviews">{{ elem.stars }}</p>
+                                    <p class="card-text" v-for="elem in doctor.specializations">{{ elem.name }}</p>
+                                </div>
+                            </router-link>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="piattaforma">
             <div class="container">
                 <h2>Una piattaforma di telemedicina a misura di utente!</h2>
@@ -254,7 +240,7 @@ svg {
     .jumbo-container {
         align-items: center;
         justify-content: center;
-        
+
 
 
         .testo-jumbo {
@@ -294,6 +280,71 @@ svg {
             }
 
         }
+    }
+}
+
+//
+.sponsorship-section {
+    h2 {
+        text-align: center;
+        font-size: 2.4rem;
+        letter-spacing: 8px;
+
+    }
+
+
+    @keyframes scroll {
+        to {
+            transform: translateX(-60%);
+        }
+
+    }
+
+    .sponsorship-link {
+        text-decoration: none;
+        color: black;
+
+    }
+
+    .b-card {
+        //background-color: #000;
+        //color: #fff;
+        //width: 200px;
+        max-height: 450px;
+        text-align: center;
+        margin-right: 150px;
+        border-radius: 8px;
+        border: 2px solid#0396A6;
+        box-shadow: 0 1px 30px #49CCCD;
+
+        &:hover {
+            border: 2px solid rgb(216, 208, 208);
+            box-shadow: 0 1px 30px #E3B14E;
+        }
+
+    }
+
+    .s-content {
+        width: 1000vw;
+        display: flex;
+    }
+
+    .sponsorship {
+        //border-style: solid;
+        // border-color: blue;
+        //border-width: 1px 0;
+        padding: 34px 0;
+        overflow: hidden;
+        //max-width: 900px;
+    }
+
+    .t-row {
+        display: flex;
+        animation: scroll 40s infinite linear;
+    }
+
+    .t-row:hover {
+        animation-play-state: paused;
     }
 }
 
@@ -347,40 +398,9 @@ svg {
     }
 
 }
-.carousel-wrap {
-  margin: 90px auto;
-  padding: 0 5%;
-  width: 80%;
-  position: relative;
-}
 
-/* fix blank or flashing items on carousel */
-.owl-carousel .item {
-  position: relative;
-  z-index: 100; 
-  -webkit-backface-visibility: hidden; 
-}
-
-/* end fix */
-.owl-nav > div {
-  margin-top: -26px;
-  position: absolute;
-  top: 50%;
-  color: #cdcbcd;
-}
-
-.owl-nav i {
-  font-size: 52px;
-}
-
-.owl-nav .owl-prev {
-  left: -30px;
-}
-
-.owl-nav .owl-next {
-  right: -30px;
-}
 .piattaforma {
+    margin-top: 100px;
 
     h2 {
         text-align: center;

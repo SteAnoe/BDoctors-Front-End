@@ -15,7 +15,7 @@ export default {
             minVoteFilter: 0,
             lastPage: null,
             sortingOption: 'null',
-            sortBy: null, 
+            sortBy: null,
         }
     },
     created() {
@@ -24,7 +24,7 @@ export default {
     computed: {
     },
     mounted() {
-        this.fetchDoctors(); 
+        this.fetchDoctors();
     },
     watch: {
         sortingOption: {
@@ -34,50 +34,65 @@ export default {
     },
     methods: {
         fetchDoctors(pageNumber) {
-        const specializationSlug = this.$route.query.slug;
-        const minVoteFilter = this.minVoteFilter;
-        const sortBy = this.sortBy;
+            const specializationSlug = this.$route.query.slug;
+            const minVoteFilter = this.minVoteFilter;
+            const sortBy = this.sortBy;
 
-        const params = {};
+            const params = {};
 
-        if (specializationSlug) {
-          params.slug = specializationSlug;
-        }
+            if (specializationSlug) {
+                params.slug = specializationSlug;
+            }
 
-        if (minVoteFilter) {
-          params.minVoteFilter = minVoteFilter;
-        }
+            if (minVoteFilter) {
+                params.minVoteFilter = minVoteFilter;
+            }
 
-        if (sortBy) {
-          params.sortBy = sortBy;
-        }
+            if (sortBy) {
+                params.sortBy = sortBy;
+            }
 
-        if (specializationSlug) {
-          axios.get(`${this.baseUrl}/api/specializations/${specializationSlug}`, { params })
-            .then((res) => {
-              console.log(res.data.doctors);
-              this.doctors = res.data.doctors;
+            if (specializationSlug) {
+                axios.get(`${this.baseUrl}/api/specializations/${specializationSlug}`, { params })
+                    .then((res) => {
+                        console.log(res.data.doctors);
+                        this.doctors = res.data.doctors;
 
-            })
-            .catch((error) => {
-              console.error('Error fetching doctors:', error);
-            });
-        } else {
-          axios.get(`${this.baseUrl}/api/doctors`)
-            .then((res) => {
-              console.log(res);
-              this.doctors = res.data.doctors;
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching doctors:', error);
+                    });
+            } else {
+                axios.get(`${this.baseUrl}/api/doctors`)
+                    .then((res) => {
+                        console.log(res);
+                        this.doctors = res.data.doctors;
 
-            })
-            .catch((error) => {
-              console.error('Error fetching doctors:', error);
-            });
-        }
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching doctors:', error);
+                    });
+            }
         },
 
 
         applyFilter() {
             this.fetchDoctors();
+        },
+        hasActiveSponsorship(doctor) {
+            if (!doctor.sponsorships || doctor.sponsorships.length === 0) {
+                return false; // Doctor has no sponsorships
+            }
+
+            const now = new Date();
+            for (const sponsorship of doctor.sponsorships) {
+                const expireDate = new Date(sponsorship.pivot.expire);
+                if (expireDate > now) {
+                    return true; // Doctor has an active sponsorship
+                }
+            }
+
+            return false; // Doctor has sponsorships, but they are all expired
         },
     }
 }
@@ -120,8 +135,7 @@ export default {
                     <div class="d-lg-flex align-items-center justify-content-center">
 
                         <div class="img-dott col-lg-6">
-                            <img
-                            :src="`photo/${this.doctors.photo}` != `photo/undefined` ? `photo/${this.doctors.photo}` : `https://t4.ftcdn.net/jpg/01/22/08/35/360_F_122083515_l2NbdWla7e38dCtAq8aXHgNLLE7AwrzX.jpg`" 
+                            <img :src="`photo/${this.doctors.photo}` != `photo/undefined` ? `photo/${this.doctors.photo}` : `https://t4.ftcdn.net/jpg/01/22/08/35/360_F_122083515_l2NbdWla7e38dCtAq8aXHgNLLE7AwrzX.jpg`"
                                 alt="" class="rounded-circle">
                         </div>
 
@@ -137,7 +151,7 @@ export default {
                                 <li v-for="(specialization, index) in doctor.specializations" :key="index">{{
                                     specialization.name }}</li>
                             </ul>
-                            <div v-if="doctor.active_sponsorship">
+                            <div v-if="hasActiveSponsorship(doctor)">
                                 <p><strong>Sponsored</strong></p>
                             </div>
                         </div>
@@ -145,7 +159,7 @@ export default {
                     </div>
                 </div>
             </div>
-            
+
 
         </div>
 
