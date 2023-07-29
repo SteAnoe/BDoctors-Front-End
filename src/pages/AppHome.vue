@@ -90,7 +90,7 @@ export default {
                 <div class="s-content">
                     <div class="t-row">
 
-                        <div v-for="doctor in doctors" :key="doctor.id" class="b-card card" style="width: 18rem;">
+                        <div v-for="doctor in doctors" :key="doctor.id" class="b-card card " style="width: 18rem;">
                             <router-link class="sponsorship-link"
                                 :to="{ name: 'SingleDoctor', params: { slug: doctor.slug } }">
 
@@ -98,12 +98,11 @@ export default {
                                     class="" alt="foto"> -->
                                 <!-- <img :src="doctor.photo" alt="foto"> -->
 
-                                <img class="img-medico my-3 h-75 d-inline-block  img-fluid"
+                                <img width="100%" class="img-fluid card-img-top "
                                     :src="`${baseUrl}/storage/${doctor.photo}` != `${baseUrl}/storage/null` ? `${baseUrl}/storage/${doctor.photo}` : `https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg`"
                                     alt="foto">
                                 <div class="card-body">
                                     <h5 class="card-title">DR.{{ doctor.name }} {{ doctor.lastname }}</h5>
-                                    <p class="card-text" v-for="elem in doctor.reviews">{{ elem.stars }}</p>
                                     <p class="card-text" v-for="elem in doctor.specializations">{{ elem.name }}</p>
                                 </div>
                             </router-link>
