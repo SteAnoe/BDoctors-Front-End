@@ -112,6 +112,33 @@ export default {
                 </div>
             </div>
         </section>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#E7F0FF" fill-opacity="1"
+                d="M0,96L30,117.3C60,139,120,181,180,192C240,203,300,181,360,192C420,203,480,245,540,240C600,235,660,181,720,149.3C780,117,840,107,900,122.7C960,139,1020,181,1080,202.7C1140,224,1200,224,1260,208C1320,192,1380,160,1410,144L1440,128L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z">
+            </path>
+        </svg>
+        <section class="specializzazioni-sfondo">
+            <main class="container">
+                <div class="pb-3 ">
+                    <h2 id="ancor-spec" class="text-center p-5">Specializzazioni</h2>
+                    <div class="md-3 content-card">
+                        <div class=" col-lg-3 col-md-4 col-sm-6 col-12 " v-for="(elem, index) in specializations"
+                            :key="index">
+                            <router-link class="custom-link" :to="{ name: 'AdvancedResearch', query: { slug: elem.slug } }"
+                                @click="selectSpecialization(specializations.slug)">
+                                <div class="div-img card specializazioni">
+                                    <img :src="elem.img" alt="">
+                                    <p>
+                                        {{ elem.name }}
+                                    </p>
+                                </div>
+                            </router-link>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </section>
         <section class="piattaforma">
             <div class="container">
                 <h2>Una piattaforma di telemedicina a misura di utente!</h2>
@@ -194,31 +221,10 @@ export default {
             </div>
         </section>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#E7F0FF" fill-opacity="1"
-                d="M0,96L30,117.3C60,139,120,181,180,192C240,203,300,181,360,192C420,203,480,245,540,240C600,235,660,181,720,149.3C780,117,840,107,900,122.7C960,139,1020,181,1080,202.7C1140,224,1200,224,1260,208C1320,192,1380,160,1410,144L1440,128L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z">
+            <path fill="#333333" fill-opacity="1"
+                d="M0,128L48,154.7C96,181,192,235,288,261.3C384,288,480,288,576,272C672,256,768,224,864,229.3C960,235,1056,277,1152,282.7C1248,288,1344,256,1392,240L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
             </path>
         </svg>
-        <section class="specializzazioni-sfondo">
-            <main class="container">
-                <div class="pb-3 ">
-                    <h2 id="ancor-spec" class="text-center p-5">Specializzazioni</h2>
-                    <div class="md-3 content-card">
-                        <div class=" col-lg-3 col-md-4 col-sm-6 col-12 " v-for="(elem, index) in specializations"
-                            :key="index">
-                            <router-link class="custom-link" :to="{ name: 'AdvancedResearch', query: { slug: elem.slug } }"
-                                @click="selectSpecialization(specializations.slug)">
-                                <div class="div-img card specializazioni">
-                                    <img :src="elem.img" alt="">
-                                    <p>
-                                        {{ elem.name }}
-                                    </p>
-                                </div>
-                            </router-link>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </section>
         <AppFooter></AppFooter>
     </div>
 </template>
