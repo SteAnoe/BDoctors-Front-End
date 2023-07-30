@@ -121,7 +121,7 @@ export default {
         <section class="specializzazioni-sfondo">
             <main class="container">
                 <div class="pb-3 ">
-                    <h2 id="ancor-spec" class="text-center p-5">Specializzazioni</h2>
+                    <h2 id="ancor-spec" class="text-center ">Specializzazioni</h2>
                     <div class="md-3 content-card">
                         <div class=" col-lg-3 col-md-4 col-sm-6 col-12 " v-for="(elem, index) in specializations"
                             :key="index">
@@ -292,8 +292,8 @@ svg {
 .sponsorship-section {
     h2 {
         text-align: center;
-        font-size: 2.4rem;
-        letter-spacing: 8px;
+        font-size: 2.6rem;
+        //letter-spacing: 8px;
 
     }
 
@@ -360,8 +360,8 @@ svg {
     h2 {
         color: #E3B14E;
         text-align: center;
-        font-size: 2.2rem;
-        letter-spacing: 8px;
+        font-size: 2.5rem;
+        //letter-spacing: 8px;
     }
 
     .content-card {
@@ -416,7 +416,7 @@ svg {
     .teleconsulto {
         align-items: center;
         justify-content: space-around;
-
+        padding-top: 20px;
         .teleconsulto-img {
             margin: 20px;
 
@@ -447,7 +447,7 @@ svg {
     .telemontaggio {
         align-items: center;
         justify-content: space-around;
-
+        padding-top: 20px;
         .telemontaggio-img {
             margin: 20px;
 
@@ -480,7 +480,7 @@ svg {
     .documenti {
         align-items: center;
         justify-content: space-around;
-
+        padding-top: 20px;
         .documenti-img {
             margin: 20px;
 
@@ -509,7 +509,7 @@ svg {
     .ricette {
         align-items: center;
         justify-content: space-around;
-
+        padding-top: 20px;
 
         .ricette-img {
             margin: 20px;

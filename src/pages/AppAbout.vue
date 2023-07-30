@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-    <div class="wrapper">
+    <div class="wrapper mt-5">
         <div class="container">
             <h1 class="titolo-sanita">Rendiamo l'esperienza sanitaria più umana</h1>
             <div class="row">
@@ -34,7 +34,7 @@ export default {
                     </div>
                 </div>
                 <div class="body-text page py-5">
-                    <h3>La nostra mission</h3>
+                    <h3>La nostra missione</h3>
                     <p>Come medici, conosciamo bene, le necessità e le priorità di salute degli utenti che si rivolgono a
                         noi, perché viviamo tutti i giorni, in prima persona, l’esperienza del contatto diretto con i
                         pazienti. La nostra missione è quella di risolvere le loro problematiche di salute “riportando”,
@@ -138,7 +138,7 @@ export default {
 
     .page {
 
-        columns: 2 200px;
+        //columns: 2 200px;
         column-gap: 30px;
         column-rule: 2px dotted #6093B6;
 
@@ -154,7 +154,7 @@ export default {
         }
     }
 
-    @import url(https://fonts.googleapis.com/css?family=Anaheim);
+    //@import url(https://fonts.googleapis.com/css?family=Anaheim);
 
     * {
         padding: 0;

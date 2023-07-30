@@ -17,9 +17,9 @@ export default {
 }
 </script>
 <template>
-    <nav class="navbar navbar-expand-md">
+    <nav class="navbar navbar-expand-md py-2" style="height: 60px;">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
+            <a class="navbar-brand d-flex align-items-center" href="http://localhost:5173/">
                 
                 BDoctors
                 
@@ -34,7 +34,7 @@ export default {
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:5173/">HOME</a>
+                        <a class="nav-link" href="http://localhost:5173/"></a>
                     </li>
                 </ul>
 
@@ -45,7 +45,7 @@ export default {
                         <a class="nav-link" href="/about-us">CHI SIAMO</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link bottonemedico" href="http://127.0.0.1:8000">SEI UN DOTTORE?</a>
+                        <a class="nav-link bottonemedico" href="http://127.0.0.1:8000/login">SEI UN DOTTORE?</a>
                     </li>
                   
                 </ul>

@@ -229,6 +229,7 @@ export default {
     <div class="container container_form">
       <div class="row h-100">
         <div class="card_img"></div>
+        <h2 style="letter-spacing: 10px; font-weight: 300;">Lascia un messaggio al Dott. {{ doctor.lastname }}</h2>
         <div class="form p-3">
           <form class="w-100" action="" method="POST" @submit.prevent="submitMessage()">
             <div class="mb-3">
@@ -294,7 +295,7 @@ export default {
         </div>
     </div> -->
   <section class="container carousel-container">
-    <h3 class="text-center">Le recensioni di {{ doctor.name }} {{ doctor.lastname }}</h3>
+    <h3 class="text-center" style="letter-spacing: 10px; font-weight: 300;">Le recensioni del Dott. {{ doctor.lastname }}</h3>
     <div id="carouselExampleRide" class="carousel slide " data-bs-ride="true">
       <div class="carousel-inner py-2">
         <!-- <div class="carousel-item card p-3 active col-12 col-md-4" >
@@ -347,9 +348,7 @@ export default {
     <!-- <div class="read-review"></div> -->
     <div class=" container write-review">
       <div class="review-form">
-        <h2>Scirvi una recensione a Dr. {{ doctor.name }} {{ doctor.lastname }}</h2>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident</p>
+        <h2>Scrivi una recensione al Dott. {{ doctor.lastname }}</h2>
         <div class="form p-3">
           <form class="w-100" @submit.prevent="submitReview()">
             <div class="mb-3">
@@ -377,7 +376,7 @@ export default {
         </div>
       </div>
       <div class="review-img ms-4">
-        <!-- <img src="https://assets.nicepagecdn.com/11a8ddce/4072348/images/13808840_5361025.png" alt="foto"> -->
+        <img src="https://assets.nicepagecdn.com/11a8ddce/4072348/images/13808840_5361025.png" alt="foto">
       </div>
     </div>
   </section>
@@ -434,7 +433,7 @@ ul {
 
   h2 {
     font-weight: 300;
-    letter-spacing: 10px;
+    letter-spacing: 8px;
   }
 
   p {
