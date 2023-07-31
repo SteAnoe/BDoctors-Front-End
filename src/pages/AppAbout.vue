@@ -19,8 +19,8 @@ export default {
             <div class="row">
                 <div class="content-img">
                     <div class="div-img col-12 col-md-6">
-                        <img src="https://assets.nicepagecdn.com/11a8ddce/4072348/images/13808848_5361046.png" alt="foto"
-                            width="100%">
+                        <img src="https://d1wh1xip64lue1.cloudfront.net/wp-content/uploads/2020/02/digital-healthcare.jpg" alt="foto" class="img-fluid"
+                        >
                     </div>
                     <div class="summary row-col-12 col-md-6">
                         <h3>BDoctors</h3>
@@ -65,7 +65,7 @@ export default {
                     <div class="container-container">
                         <img class="container-animation"
                             src="https://scontent-mxp1-1.xx.fbcdn.net/v/t39.30808-6/332881851_3613070772312857_655919849961643030_n.jpg?_nc_cat=108&cb=99be929b-59f725be&ccb=1-7&_nc_sid=174925&_nc_ohc=fYn__TLa_u0AX9vuVNX&_nc_ht=scontent-mxp1-1.xx&oh=00_AfAEHzTTucSwlyHhTnOsIfBChqWV5XsmuYS8-_wwsPiMfw&oe=64C8B551"
-                            alt="Elisabetta Scagione">
+                            alt="<Giorgio Prizzi>">
                     </div>
                     <p class="text-center"><em>Giorgio Prizzi</em></p>
                 </div>
@@ -81,15 +81,15 @@ export default {
                     <div class="container-container">
                         <img class="container-animation"
                             src="https://media.licdn.com/dms/image/C4D03AQFGwxJrN4Ah5Q/profile-displayphoto-shrink_800_800/0/1562232159183?e=1695859200&v=beta&t=93qRthFZuxVVnSkifbPe5TEe7cOxftudZLQjiLnv7k0"
-                            alt="Elisabetta Scagione">
+                            alt="Stefano Anoè">
                     </div>
-                    <p class="text-center"><em>Elisabetta Scagione</em></p>
+                    <p class="text-center"><em>Stefano Anoè</em></p>
                 </div>
                 <div class="">
                     <div class="container-container">
                         <img class="container-animation"
                             src="https://media.licdn.com/dms/image/D4E03AQESm9zP4G5QOw/profile-displayphoto-shrink_200_200/0/1688913064514?e=1695859200&v=beta&t=2V8SQGivH23F2IjP38lT-lygDO9bhrdS_EcRO-tB-gk"
-                            alt="Elisabetta Scagione">
+                            alt="Oksana Karpyn">
                     </div>
                     <p class="text-center"><em>Oksana Karpyn</em></p>
                 </div>
@@ -97,7 +97,7 @@ export default {
                     <div class="container-container">
                         <img class="container-animation"
                             src="https://scontent-mxp2-1.xx.fbcdn.net/v/t39.30808-6/358140706_2421603324688040_954895442534135134_n.jpg?stp=dst-jpg_s640x640&_nc_cat=100&cb=99be929b-59f725be&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=KJ4kgrXr0PEAX_ROaOu&_nc_ht=scontent-mxp2-1.xx&oh=00_AfBoRrrVSTP-zyKKusg-XErfGH0eWcdrvQcROO6qQhBaEg&oe=64C87EE3"
-                            alt="Elisabetta Scagione">
+                            alt="Simone Scordato">
                     </div>
                     <p class="text-center"><em>Simone Scordato</em></p>
                 </div>
@@ -184,13 +184,13 @@ export default {
 
         //columns: 2 200px;
         column-gap: 30px;
-        column-rule: 2px dotted #6093B6;
+        column-rule: 2px dotted #3EA8BD;
 
         h3 {
             padding: 10px;
             margin: 10px 0;
             column-span: all;
-            background-color: #80bce3;
+            background-color: #3EA8BD;
         }
 
         .page p {
