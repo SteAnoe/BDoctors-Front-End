@@ -51,19 +51,11 @@ export default {
 </script>
 <template>
     <div class="wrapper">
-        <section class="jumbotron ">
-            <div class="container ">
-                <div class=" d-md-flex d-lg-flex jumbo-container">
-                    <div class="testo-jumbo col-12 col-sm-12 col-md-6 col-lg-5">
-                        <h1>BDoctors</h1>
-                        <p class="py-3">Su BDoctors trovi i migliori specialisti in tutti i campi della Medicina. Se
-                            desideri effettuare una Televisita o ricevere un secondo parere su una diagnosi già fatta, puoi
-                            cercare un dottore online tra i nostri medici di fiducia.</p>
-                        <a href="#ancor-spec" class="btn btn-primary px-5 text-uppercase">Inizia ricerca</a>
-                    </div>
-                    <div class="img-jumbo col-12 col-sm-12 col-md-8 col-lg-6 px-2 ">
-                        <img src="https://www.pngmart.com/files/21/Female-Doctor-PNG.png" alt="foto-doctor">
-                    </div>
+        <section class="jumbotron">
+            <div class="container h-100 d-flex jumbo-container align-items-center justify-content-center">
+                <div class="testo-jumbo text-center">
+                    <h1>BDoctors</h1>
+                    <a href="#ancor-spec" class="btn px-5 text-white text-uppercase">Inizia ricerca</a>
                 </div>
             </div>
         </section>
@@ -75,34 +67,36 @@ export default {
                 </li>
             </ul>
         </div> -->
-        <section class="sponsorship-section">
-            <h2 class="py-5">Dottori in evidenza</h2>
-            <div class=" sponsorship">
-                <div class="s-content">
-                    <div class="t-row">
-
-                        <div v-for="doctor in doctors" :key="doctor.id" class="b-card card " style="width: 18rem;">
-                            <router-link class="sponsorship-link"
-                                :to="{ name: 'SingleDoctor', params: { slug: doctor.slug } }">
-
-                                <!-- <img src="https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg"
-                                    class="" alt="foto"> -->
-                                <!-- <img :src="doctor.photo" alt="foto"> -->
-
-                                <img width="100%" class="img-fluid card-img-top "
-                                    :src="`${baseUrl}/storage/${doctor.photo}` != `${baseUrl}/storage/null` ? `${baseUrl}/storage/${doctor.photo}` : `https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg`"
-                                    alt="foto">
-                                <div class="card-body">
-                                    <h5 class="card-title">DR.{{ doctor.name }} {{ doctor.lastname }}</h5>
-                                    <p class="card-text" v-for="elem in doctor.specializations">{{ elem.name }}</p>
-                                </div>
-                            </router-link>
+        <div class="jumbotron-sponsor">
+            <section class="sponsorship-section">
+                <h2 class="py-5">Dottori in evidenza</h2>
+                <div class=" sponsorship">
+                    <div class="s-content">
+                        <div class="t-row">
+    
+                            <div v-for="doctor in doctors" :key="doctor.id" class="b-card card " style="width: 18rem;">
+                                <router-link class="sponsorship-link"
+                                    :to="{ name: 'SingleDoctor', params: { slug: doctor.slug } }">
+    
+                                    <!-- <img src="https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg"
+                                        class="" alt="foto"> -->
+                                    <!-- <img :src="doctor.photo" alt="foto"> -->
+    
+                                    <img width="100%" class="img-fluid card-img-top "
+                                        :src="`${baseUrl}/storage/${doctor.photo}` != `${baseUrl}/storage/null` ? `${baseUrl}/storage/${doctor.photo}` : `https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg`"
+                                        alt="foto">
+                                    <div class="card-body">
+                                        <h5 class="card-title">DR.{{ doctor.name }} {{ doctor.lastname }}</h5>
+                                        <p class="card-text" v-for="elem in doctor.specializations">{{ elem.name }}</p>
+                                    </div>
+                                </router-link>
+                            </div>
+    
                         </div>
-
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         
         <section class="specializzazioni-sfondo">
@@ -227,20 +221,15 @@ svg {
     background-size: cover;
     //background-repeat: no-repeat;
     background-position: center;
-    
+    margin-top: 90px;
+    height: calc(100vh - 90px);
 
-
-    .jumbo-container {
-        // align-items: center;
-        justify-content: center;
-        padding: 150px 0px 0px 0px;
 
 
 
         .testo-jumbo {
-            // width: 50%;
-
-            // background-color: #8284888a;
+            
+            
 
             h1 {
                 font-size: 4rem;
@@ -248,109 +237,89 @@ svg {
 
             }
 
-            p {
-                font-size: 1.4rem;
-                //font-weight: 400;
-                line-height: 48px;
-                background-color: #2b457985;
-                border-radius: 8px;
-                padding: 10px;
-                letter-spacing: 1.5px;
-            }
-
             .btn {
-                font-size: 1.50rem;
-                padding: 1rem 1.5rem;
+                font-size: 20px;
+                padding: 12px;
                 border-radius: 25px;
                 border: 0;
-                background-color: rgb(0, 144, 160);
+                background-color: #FF4500;
 
             }
 
         }
 
-        .img-jumbo {
-            position: relative;
-            display: flex;
-            align-items: end;
-         img{
-                width: 100%;
-                display: block;
-                margin-bottom: -2px;
-        }
-
-
-
-
-           
-        }
-    }
+        
+    
 }
-
+ 
 //
-.sponsorship-section {
-    h2 {
-        text-align: center;
-        font-size: 2.6rem;
-        color: #19516C;
-        //letter-spacing: 8px;
-
-    }
-
-
-    @keyframes scroll {
-        to {
-            transform: translateX(-60%);
+.jumbotron-sponsor{
+    
+    .sponsorship-section {
+        h2 {
+            text-align: center;
+            font-size: 2.6rem;
+            color: #19516C;
+            //letter-spacing: 8px;
+    
         }
-
-    }
-
-    .sponsorship-link {
-        text-decoration: none;
-        color: black;
-
-    }
-
-    .b-card {
-        //background-color: #000;
-        //color: #fff;
-        //width: 200px;
-        max-height: 450px;
-        text-align: center;
-        margin-right: 150px;
-        border-radius: 8px;
-        border: 2px solid#0396A6;
-        box-shadow: 0 1px 30px #49CCCD;
-
-        &:hover {
-            border: 2px solid rgb(216, 208, 208);
-            box-shadow: 0 1px 30px #E3B14E;
+    
+    
+        @keyframes scroll {
+            to {
+                transform: translateX(-60%);
+            }
+    
         }
-
+    
+        .sponsorship-link {
+            text-decoration: none;
+            color: black;
+    
+        }
+    
+        .b-card {
+            //background-color: #000;
+            //color: #fff;
+            //width: 200px;
+            max-height: 450px;
+            text-align: center;
+            margin-right: 150px;
+            border-radius: 8px;
+            border: 2px solid#0396A6;
+            box-shadow: 0 1px 30px #49CCCD;
+    
+            &:hover {
+                border: 2px solid rgb(216, 208, 208);
+                box-shadow: 0 1px 30px #E3B14E;
+            }
+    
+        }
+    
+        .s-content {
+            width: 1000vw;
+            display: flex;
+        }
+    
+        .sponsorship {
+            //border-style: solid;
+            // border-color: blue;
+            //border-width: 1px 0;
+            padding: 34px 0;
+            overflow: hidden;
+            //max-width: 900px;
+        }
+    
+        .t-row {
+            display: flex;
+            animation: scroll 40s infinite linear;
+        }
+    
+        .t-row:hover {
+            animation-play-state: paused;
+        }
     }
-
-    .s-content {
-        width: 1000vw;
-        display: flex;
-    }
-
-    .sponsorship {
-        //border-style: solid;
-        // border-color: blue;
-        //border-width: 1px 0;
-        padding: 34px 0;
-        overflow: hidden;
-        //max-width: 900px;
-    }
-
-    .t-row {
-        display: flex;
-        animation: scroll 40s infinite linear;
-    }
-
-    .t-row:hover {
-        animation-play-state: paused;
-    }
+    
 }
 
 .specializzazioni-sfondo {

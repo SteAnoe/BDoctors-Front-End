@@ -17,13 +17,16 @@ export default {
 }
 </script>
 <template>
-    <nav class="navbar navbar-expand-md py-2" style="height: 60px;">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="http://localhost:5173/">
+    <nav class="navbar navbar-expand-md " style="height: 90px;">
+        <div class="container ">
+            <div class="d-flex align-items-center">
+                <a class="navbar-brand d-flex align-items-center" href="http://localhost:5173/">
+                    <img  src="../../public/1.png" alt="" style="max-height: 70px;">
+                    <div>BDoctors</div>
+                </a>
                 
-                BDoctors
-                
-            </a>
+            </div>
+            
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="#">
@@ -55,8 +58,8 @@ export default {
 </template>
 <style lang="scss" scoped >
 .navbar{
-    
-    background-color: #00aabd;
+    background-color: white;
+    //background-color: #00aabd;
     box-shadow: 0 1px 30px #49CCCD;
     position: fixed;
     top: 0;
@@ -64,7 +67,7 @@ export default {
     right: 0;
     z-index: 999;
     li, a{
-        color: white;
+        color: black;
     }
     .bottonemedico{
         border-radius: 2px solid white;
