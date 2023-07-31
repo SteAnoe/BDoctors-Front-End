@@ -17,6 +17,22 @@ export default {
       reviewStars: 0,
       modalVisible: false,
       isReviewModal: false,
+      remainingCharacters: 255,
+      maxLength: 255,
+      errorMessages: {
+      email: '',
+      name: '',
+      lastname: '',
+      text: '',
+      
+      },
+      reviewMaxLength: 255,
+    reviewRemainingCharacters: 255,
+    reviewErrorMessages: {
+      reviewName: '',
+      reviewText: '',
+      reviewStars: '',
+    },
     }
   },
   created() {
@@ -55,13 +71,41 @@ export default {
         lastname: this.lastname,
         text: this.text
       };
+      this.errorMessages = {
+    email: '',
+    name: '',
+    lastname: '',
+    text: '',
+  };
+
+  // Add validation checks for each field
+  if (!this.email) {
+    this.errorMessages.email = 'Inserisci una mail valida';
+  }
+
+  if (!this.name) {
+    this.errorMessages.name = 'Inserisci il tuo nome';
+  }
+
+  if (!this.lastname) {
+    this.errorMessages.lastname = 'Inserisci il tuo cognome';
+  }
+
+  if (!this.text) {
+    this.errorMessages.text = 'Inserisci un messaggio';
+  }
+
+  // Check if there are any error messages; if yes, don't submit the form
+  if (Object.values(this.errorMessages).some(msg => msg !== '')) {
+    return;
+  }
       // Make an API call to send the message to the backend
       // using Axios or other HTTP library
       axios.post(`${this.baseUrl}/api/message`, paramData)
         .then(() => {
           // Show a success message or perform other actions after successful submission
           this.isReviewModal = false;
-          this.successMessage = 'Message sent successfully!';
+          this.successMessage = 'Messaggio inviato con successo!';
           this.showModal();
           // Clear the form data after successful submission
 
@@ -100,6 +144,30 @@ export default {
     },
 
     submitReview() {
+      this.updateReviewCounter();
+      this.reviewErrorMessages = {
+    reviewName: '',
+    reviewText: '',
+    reviewStars: '',
+  };
+
+  // Add validation checks for each field in the review form
+  if (!this.reviewName) {
+    this.reviewErrorMessages.reviewName = 'Inserisci il tuo nome';
+  }
+
+  if (!this.reviewText) {
+    this.reviewErrorMessages.reviewText = 'Inserisci una recensione';
+  }
+
+  if (this.reviewStars === 0) {
+    this.reviewErrorMessages.reviewStars = 'Inserisci una stella';
+  }
+
+  // Check if there are any error messages; if yes, don't submit the review
+  if (Object.values(this.reviewErrorMessages).some(msg => msg !== '')) {
+    return;
+  }
       const reviewData = {
         doctor_id: this.doctor.id,
         name: this.reviewName,
@@ -112,7 +180,7 @@ export default {
         .then(() => {
           // Show a success message or perform other actions after successful submission
           this.isReviewModal = true;
-          this.successMessage = 'Review sent successfully!';
+          this.successMessage = 'Recensione inviata con successo!';
           this.showModal();
           // Clear the review form data after successful submission
           this.reviewName = '';
@@ -135,40 +203,90 @@ export default {
       if (firstChild) {
         firstChild.classList.add('active');
       }
+    },
+    updateCounter() {
+      const description = this.text;
+
+      if (description.length > this.maxLength) {
+        this.text = description.slice(0, this.maxLength); // Truncate the text to the max length
+      }
+
+      this.remainingCharacters = this.maxLength - this.text.length;
+    },
+
+    updateReviewCounter() {
+    const reviewDescription = this.reviewText;
+
+    if (reviewDescription.length > this.reviewMaxLength) {
+      this.reviewText = reviewDescription.slice(0, this.reviewMaxLength); // Truncate the text to the max length
     }
+
+    this.reviewRemainingCharacters = this.reviewMaxLength - this.reviewText.length;
+  },
+    
   }
 }
 </script>
 
 <template>
   <section class="doctor py-5">
-    <div class="card container my-5 h-40">
-      <h3 class="fs-2 my-4 text-center ">{{ doctor.name }} {{ doctor.lastname }}</h3>
-      <div class="row justify-content-center align-items-center">
-        <div class="col-12 col-md-4  img-dottore justify-content-center align-items-center d-flex">
-          <img class="img-medico my-3 h-75 d-inline-block "
-            :src="`${baseUrl}/storage/${this.doctor.photo}` != `${baseUrl}/storage/null` ? `${baseUrl}/storage/${this.doctor.photo}` : `https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg`"
-            alt="foto">
+    <div class="container my-5 h-40">
+      <h3 class="fs-2 p-4 text-center card d-inline-block testo-centrale">Dr.  {{ doctor.name }} {{ doctor.lastname }}</h3>
+      <div class="row justify-content-center align-items-start">
+        <div class="col-12 col-md-6 my-2">
+            <div class="card card-img p-3">
+              <img class="img-medico my-3 h-75 d-inline-block rounded"
+                :src="`${baseUrl}/storage/${this.doctor.photo}` != `${baseUrl}/storage/null` ? `${baseUrl}/storage/${this.doctor.photo}` : `https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg`"
+                alt="foto">
+            </div>
+            <div class="spec-dottore card p-3">
+                <ul class="card-text">
+                  <h5 class="text-bold">Medico specializzato in:</h5>
+                  <li v-for="(elem, index) in doctor.specializations" :key="index">{{ elem.name }}</li>
+                </ul>
+                <div><strong>Numero di telefono:</strong> {{ doctor.phone }}</div>
+                <div><strong>Email:</strong> {{ doctor.email }}</div>
+                <div><strong>Indirizzo:</strong> {{ doctor.address }}</div>
+            </div>
         </div>
-        <div class="col-12 col-md-4  spec-dottore ">
-          <ul class="card-text">
-            <h5 class="text-bold">Medico specializzato in:</h5>
-            <li v-for="(elem, index) in doctor.specializations" :key="index">{{ elem.name }}</li>
-          </ul>
-          <div><strong>Numero di telefono:</strong> {{ doctor.phone }}</div>
-          <div><strong>Email:</strong> {{ doctor.email }}</div>
-          <div><strong>Indirizzo:</strong> {{ doctor.address }}</div>
-        </div>
-        <div class="col-12 col-md-4  desc-dottore ">
-          <h5 class="text-bold">Descrizione:</h5>
-          <p>{{ doctor.description }}</p>
-  
-  
+        <div class="col-12 col-md-6 my-2">
+          <div class="p-3 card desc-dottore">
+            <h5 class="text-bold">Descrizione:</h5>
+            <p>{{ doctor.description }}</p>
+          </div>
         </div>
       </div>
     </div>
 
   </section>
+  <section class="container carousel-container">
+    <h3 class="text-center pb-5" style="letter-spacing: 10px; font-weight: 600;">Le recensioni del Dott. {{ doctor.lastname }}</h3>
+    <div id="carouselExampleRide" class="carousel slide " data-bs-ride="true">
+      <div class="carousel-inner py-2">
+        <!-- <div class="carousel-item card p-3 active col-12 col-md-4" >
+          Guarda cosa ne pensano i nostri clienti di {{ doctor.name }} {{ doctor.lastname }}
+        </div> -->
+        <div class="carousel-item card p-3 col-12 col-md-4 "   v-for="(review, index) in doctor.reviews" :key="index">
+          <p class="fw-bold">{{ review.name }} {{ review.lastname }}</p>
+          <p>{{ review.text }}</p>
+          <div>
+            <i v-for="n in 5" class="fa-star empty"
+              :class="(n <= review.stars) ? 'fa-solid text-warning' : 'fa-regular'"></i>
+          </div>
+          <p>{{ formatDate(review.created_at) }}</p>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+
   <!-- <div class="card-dottore">
   <div v-if="doctor" class="container  h-100 d-flex justify-content-center align-items-center">
       <div class="m-3">
@@ -225,34 +343,39 @@ export default {
         </tbody>
       </table>
     </div> -->
-  <div class="wrapper">
+  <div class="wrapper py-2">
     <div class="container container_form">
       <div class="row h-100">
         <div class="card_img"></div>
-        <h2 style="letter-spacing: 10px; font-weight: 300;">Lascia un messaggio al Dott. {{ doctor.lastname }}</h2>
+        <h2 class="text-center py-5" style="letter-spacing: 10px; font-weight: 600; ">Lascia un messaggio al Dott. {{ doctor.lastname }}</h2>
         <div class="form p-3">
           <form class="w-100" action="" method="POST" @submit.prevent="submitMessage()">
             <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label p-2">Email address</label>
+              <label for="exampleFormControlInput1" class="form-label p-2">Email</label>
               <input v-model="email" type="email" name="email" class="form-control p-2" id="exampleFormControlInput1"
-                placeholder="Enter a valid emali address">
+                placeholder="Inserisci la tua mail">
+              <p class="text-danger">{{ errorMessages.email }}</p>
             </div>
-            <div class="mb-3 d-flex  justify-content-between">
+            <div class="mb-3 d-flex justify-content-between">
               <div class="">
-                <label for="first_name" class="form-label mx-2 p-2">First Name</label>
+                <label for="first_name" class="form-label mx-2 p-2">Nome</label>
                 <input v-model="name" type="text" name="name" class="form-control p-2" id="first_name"
-                  placeholder="Enter your First Name ">
+                  placeholder="Inserisci il tuo nome">
+                <p class="text-danger">{{ errorMessages.name }}</p>
               </div>
               <div class="">
-                <label for="last_name" class="form-label p-2">Last Name</label>
+                <label for="last_name" class="form-label p-2">Cognome</label>
                 <input v-model="lastname" type="text" name="lastname" class="form-control p-2" id="last_name"
-                  placeholder="Enter your Last Name ">
+                  placeholder="Inserisci il tuo cognome">
+                <p class="text-danger">{{ errorMessages.lastname }}</p>
               </div>
             </div>
             <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label p-2">Message</label>
+              <label for="exampleFormControlTextarea1" class="form-label p-2">Messaggio</label>
               <textarea v-model="text" class="form-control p-2" name="text" id="exampleFormControlTextarea1" rows="5"
-                placeholder="Enter your Message"></textarea>
+                placeholder="Inserisci il tuo messaggio" @input="updateCounter"></textarea>
+              <span id="counter">{{ remainingCharacters }}/{{ maxLength }}</span>
+              <p class="text-danger">{{ errorMessages.text }}</p>
             </div>
             <div class="mb-3">
               <button type="submit" class="btn">manda un messaggio</button>
@@ -294,34 +417,7 @@ export default {
             </div>
         </div>
     </div> -->
-  <section class="container carousel-container">
-    <h3 class="text-center" style="letter-spacing: 10px; font-weight: 300;">Le recensioni del Dott. {{ doctor.lastname }}</h3>
-    <div id="carouselExampleRide" class="carousel slide " data-bs-ride="true">
-      <div class="carousel-inner py-2">
-        <!-- <div class="carousel-item card p-3 active col-12 col-md-4" >
-          Guarda cosa ne pensano i nostri clienti di {{ doctor.name }} {{ doctor.lastname }}
-        </div> -->
-        <div class="carousel-item card p-3 col-12 col-md-4 "   v-for="(review, index) in doctor.reviews" :key="index">
-          <p class="fw-bold">{{ review.name }} {{ review.lastname }}</p>
-          <p>{{ review.text }}</p>
-          <div>
-            <i v-for="n in 5" class="fa-star empty"
-              :class="(n <= review.stars) ? 'fa-solid text-warning' : 'fa-regular'"></i>
-          </div>
-          <p>{{ formatDate(review.created_at) }}</p>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </section>
-
+ 
   <!-- <div class="container">
       <h2>Reviews per il dottor {{ doctor.name }} {{ doctor.lastname }}</h2>
       <table class="table">
@@ -344,56 +440,61 @@ export default {
       </table>
     </div> -->
 
-  <section class="review">
+  <section class="review pt-5">
     <!-- <div class="read-review"></div> -->
     <div class=" container write-review">
-      <div class="review-form">
-        <h2>Scrivi una recensione al Dott. {{ doctor.lastname }}</h2>
+      
+      <div class="review-form row h-100 justify-content-center">
+      <h2  class="text-center py-5" style="letter-spacing: 10px; font-weight: 600;">Scrivi una recensione al Dott. {{ doctor.lastname }}</h2>  
         <div class="form p-3">
-          <form class="w-100" @submit.prevent="submitReview()">
-            <div class="mb-3">
-              <label for="reviewName" class="form-label p-2">Name</label>
-              <input v-model="reviewName" type="text" name="reviewName" class="form-control p-2" id="reviewName"
-                placeholder="Enter your Name">
-            </div>
-            <div class="mb-3">
-              <label for="reviewText" class="form-label p-2">Review</label>
-              <textarea v-model="reviewText" class="form-control p-2" name="reviewText" id="reviewText" rows="5"
-                placeholder="Enter your Review"></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="reviewStars" class="form-label p-2">Stars</label>
-              <div class="stars">
-                <span class="star" v-for="star in 5" :key="star" @click="reviewStars = star">
-                  <i class="star-icon fa fa-star" :style="{ color: star <= reviewStars ? 'gold' : 'gray' }"></i>
-                </span>
-              </div>
-            </div>
-            <div class="mb-3">
-              <button type="submit" class="btn btn-primary">Submit Review</button>
-            </div>
-          </form>
+          <form class="w-100 pb-5" @submit.prevent="submitReview()">
+          <div class="mb-3">
+            <label for="reviewName" class="form-label p-2">Nome</label>
+            <input v-model="reviewName" type="text" name="reviewName" class="form-control p-2" id="reviewName"
+              placeholder="Inserisci il tuo nome">
+            <p class="text-danger">{{ reviewErrorMessages.reviewName }}</p>
+          </div>
+          <div class="mb-3">
+            <label for="reviewText" class="form-label p-2">Recensione</label>
+            <textarea v-model="reviewText" class="form-control p-2" name="reviewText" id="reviewText" rows="5"
+              placeholder="Inserisci la recensione" @input="updateReviewCounter"></textarea>
+              <span id="reviewCounter">{{ reviewRemainingCharacters }}/{{ reviewMaxLength }}</span>
+            <p class="text-danger">{{ reviewErrorMessages.reviewText }}</p>
+          </div>
+          <div class="mb-3">
+  <label for="reviewStars" class="form-label p-2">Voto</label>
+  <div class="stars">
+    <span class="star" v-for="star in 5" :key="star" @click="reviewStars = star">
+      <i class="star-icon fa fa-star" :style="{ color: star <= reviewStars ? 'gold' : 'gray' }"></i>
+    </span>
+  </div>
+  <p class="text-danger">{{ reviewErrorMessages.reviewStars }}</p>
+</div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+          </div>
+        </form>
         </div>
       </div>
-      <div class="review-img ms-4">
+      <!-- <div class="review-img ms-4">
         <img src="https://assets.nicepagecdn.com/11a8ddce/4072348/images/13808840_5361025.png" alt="foto">
-      </div>
+      </div> -->
     </div>
   </section>
   <div class="modal fade" tabindex="-1" role="dialog" ref="modal">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Success</h5>
+          <h5 class="modal-title"></h5>
           <button type="button" class="close" @click="closeModal">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>{{ successMessage }}</p>
+          <p>{{successMessage}}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" @click="closeModal">Close</button>
+          <button type="button" class="btn btn-primary" @click="closeModal">Chiudi</button>
         </div>
       </div>
     </div>
@@ -419,17 +520,34 @@ ul {
   padding-left: 0;
 }
 .doctor{
-  background-color: #E7F0FF;
+  //background-color: #E7F0FF;
+  .testo-centrale{
+    border-bottom: 1px solid lightgray;
+  }
+
+
+  .card-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .img-medico {
     max-width: 80%;
     max-height: 400px;
     padding: 0;
   }
+  .spec-dottore{
+    margin-top: 10px;
+  }
 }
-
+.review{
+  background: rgb(0,170,189);
+  background: linear-gradient(180deg, rgba(0,170,189,1) 0%, rgba(255,255,255,1) 87%);
+}
 .write-review {
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
 
   h2 {
     font-weight: 300;
@@ -442,7 +560,10 @@ ul {
     padding-top: 20px;
   }
 }
-
+.close{
+  border: none;
+  background-color: white;
+}
 .form {
 
   background-color: #fff;
@@ -477,13 +598,16 @@ ul {
 }
 
 .wrapper {
-  background-image: url(https://assets.nicepagecdn.com/11a8ddce/4072348/images/13808841.jpg);
-  background-size: cover;
+  // background-image: url(https://assets-global.website-files.com/5d0b99352ab90c616bf47b31/6151b92e53e2c6a8ea8fe4e5_902.jpg);
+  // background-size: cover;
+  background: rgb(0,170,189);
+  background: linear-gradient(0deg, rgba(0,170,189,1) 0%, rgba(255,255,255,1) 87%);
+
 
   .row {
     height: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: center;
 
   }
 
