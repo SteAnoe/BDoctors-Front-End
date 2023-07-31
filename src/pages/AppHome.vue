@@ -61,21 +61,14 @@ export default {
                             cercare un dottore online tra i nostri medici di fiducia.</p>
                         <a href="#ancor-spec" class="btn btn-primary px-5 text-uppercase">Inizia ricerca</a>
                     </div>
-                    <div class="img-jumbo col-12 col-sm-12 col-md-8 col-lg-6 px-2">
+                    <div class="img-jumbo col-12 col-sm-12 col-md-8 col-lg-6 px-2 ">
                         <!-- <img class=""
                             src="https://www.nicepng.com/png/full/47-478903_transparent-background-doctors-clipart.png"
                             alt=""> -->
-                        <img src="https://medicopress.media/wp-content/uploads/2017/02/homepage_vector_doctors-02.png"
-                            alt="">
                     </div>
                 </div>
             </div>
         </section>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#22C1C3" fill-opacity="1"
-                d="M0,224L34.3,202.7C68.6,181,137,139,206,128C274.3,117,343,139,411,122.7C480,107,549,53,617,58.7C685.7,64,754,128,823,144C891.4,160,960,128,1029,138.7C1097.1,149,1166,203,1234,218.7C1302.9,235,1371,213,1406,202.7L1440,192L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z">
-            </path>
-        </svg>
         <!-- <div>
             <h1>Doctors with Active Sponsorship</h1>
             <ul>
@@ -235,11 +228,15 @@ svg {
 }
 
 .jumbotron {
-    background: rgb(34, 193, 195);
-    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(3, 150, 166, 1) 65%);
+    background-image: url(https://assets-global.website-files.com/5d0b99352ab90c616bf47b31/6151b92e53e2c6a8ea8fe4e5_902-p-800.jpeg);
+    //background: rgb(34, 193, 195);
+    //background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(3, 150, 166, 1) 65%);
     color: white;
     margin-top: 56px;
-
+    background-size: cover;
+    //background-repeat: no-repeat;
+    background-position: center;
+    padding: 150px 0px 200px 0px;
 
 
     .jumbo-container {
@@ -250,7 +247,8 @@ svg {
 
         .testo-jumbo {
             // width: 50%;
-            padding: 100px 0;
+
+            // background-color: #8284888a;
 
             h1 {
                 font-size: 4rem;
@@ -260,8 +258,12 @@ svg {
 
             p {
                 font-size: 1.4rem;
-                font-weight: 100;
+                //font-weight: 400;
                 line-height: 48px;
+                background-color: #2b457985;
+                border-radius: 8px;
+                padding: 10px;
+                letter-spacing: 1.5px;
             }
 
             .btn {
@@ -270,6 +272,7 @@ svg {
                 border-radius: 25px;
                 border: 0;
                 background-color: rgb(0, 144, 160);
+
             }
 
         }
@@ -278,9 +281,13 @@ svg {
             // width: 50%;
 
 
+
+
             img {
                 width: 100%;
                 display: block;
+                aspect-ratio: 1;
+                border-radius: 50%;
 
             }
 
@@ -417,6 +424,7 @@ svg {
         align-items: center;
         justify-content: space-around;
         padding-top: 20px;
+
         .teleconsulto-img {
             margin: 20px;
 
@@ -448,6 +456,7 @@ svg {
         align-items: center;
         justify-content: space-around;
         padding-top: 20px;
+
         .telemontaggio-img {
             margin: 20px;
 
@@ -481,6 +490,7 @@ svg {
         align-items: center;
         justify-content: space-around;
         padding-top: 20px;
+
         .documenti-img {
             margin: 20px;
 
