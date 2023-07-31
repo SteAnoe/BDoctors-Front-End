@@ -1,6 +1,8 @@
 <script>
+
 import axios from 'axios';
 import { store } from '../store';
+
 export default {
     name: 'AdvancedResearch',
     components: {
@@ -94,6 +96,29 @@ export default {
 
             return false; // Doctor has sponsorships, but they are all expired
         },
+        formatAvgStars(avgStars){
+          return Math.round(avgStars);
+        },
+        generateStars(avgStars, color) {
+      const fullStars = Math.floor(avgStars); // Number of full stars
+      const halfStar = avgStars - fullStars >= 0.5; // Whether to show a half star
+      const emptyStars = 5 - fullStars - (halfStar ? 1 : 0); // Number of empty stars
+
+      let starsHTML = '';
+      for (let i = 0; i < fullStars; i++) {
+        starsHTML += `<span class="star filled fs-5" style="color: #EDB05A">&#9733;</span>`;
+      }
+
+      if (halfStar) {
+        starsHTML += `<span class="star half-filled fs-5" style="color: #EDB05A">&#9733;</span>`;
+      }
+
+      for (let i = 0; i < emptyStars; i++) {
+        starsHTML += '<span class="star fs-5">&#9734;</span>';
+      }
+
+      return starsHTML;
+    },
     }
 }
 </script>
@@ -145,7 +170,8 @@ export default {
                                 <h5 class="card-title">Visita profilo</h5>
                             </router-link>
                             <p><strong>N° Recensioni:</strong> {{ doctor.reviews_count }}</p>
-                            <p>Avg-stars: {{ doctor.avg_stars }}</p>
+                            <!-- <p>Avg-stars: {{ formatAvgStars(doctor.avg_stars) }}</p> -->
+                            <div v-html="generateStars(doctor.avg_stars)"></div>
                             <span><strong>Specializzato in</strong></span>
                             <ul>
                                 <li v-for="(specialization, index) in doctor.specializations" :key="index">{{
@@ -167,6 +193,7 @@ export default {
     </main>
 </template>
 <style lang="scss" scoped>
+
 .sfondo {
     background-color: #e7f0ff;
     margin-top: 56px;
@@ -223,5 +250,13 @@ export default {
 
 
     }
+}
+.star {
+    color: black;
+}
+
+.filled,
+.half-filled {
+    color: yellow;
 }
 </style>
