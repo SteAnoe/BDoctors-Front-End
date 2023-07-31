@@ -62,9 +62,7 @@ export default {
                         <a href="#ancor-spec" class="btn btn-primary px-5 text-uppercase">Inizia ricerca</a>
                     </div>
                     <div class="img-jumbo col-12 col-sm-12 col-md-8 col-lg-6 px-2 ">
-                        <!-- <img class=""
-                            src="https://www.nicepng.com/png/full/47-478903_transparent-background-doctors-clipart.png"
-                            alt=""> -->
+                        <img src="https://www.pngmart.com/files/21/Female-Doctor-PNG.png" alt="foto-doctor">
                     </div>
                 </div>
             </div>
@@ -78,7 +76,7 @@ export default {
             </ul>
         </div> -->
         <section class="sponsorship-section">
-            <h2>Dottori in evidenza</h2>
+            <h2 class="py-5">Dottori in evidenza</h2>
             <div class=" sponsorship">
                 <div class="s-content">
                     <div class="t-row">
@@ -106,15 +104,11 @@ export default {
             </div>
         </section>
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#E7F0FF" fill-opacity="1"
-                d="M0,96L30,117.3C60,139,120,181,180,192C240,203,300,181,360,192C420,203,480,245,540,240C600,235,660,181,720,149.3C780,117,840,107,900,122.7C960,139,1020,181,1080,202.7C1140,224,1200,224,1260,208C1320,192,1380,160,1410,144L1440,128L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z">
-            </path>
-        </svg>
+        
         <section class="specializzazioni-sfondo">
             <main class="container">
                 <div class="pb-3 ">
-                    <h2 id="ancor-spec" class="text-center ">Specializzazioni</h2>
+                    <h2 id="ancor-spec" class="text-center py-5">Specializzazioni</h2>
                     <div class="md-3 content-card">
                         <div class=" col-lg-3 col-md-4 col-sm-6 col-12 " v-for="(elem, index) in specializations"
                             :key="index">
@@ -142,7 +136,7 @@ export default {
                             <b>Hai bisogno di un consulto in tempi rapidi?</b>
                             Doctorium è la piattaforma di telemedicina che ti permette di effettuare un teleconsulto in
                             brevissimo
-                            tempo. Non trovi l’appuntamento più adatto a te? Richiedine uno prioritario! I nostri
+                            tempo. Non trovi l'appuntamento più adatto a te? Richiedine uno prioritario! I nostri
                             specialisti lo
                             creeranno appositamente per te e potrai effettuarlo anche oggi stesso. Inoltre, se lo
                             specialista è
@@ -150,15 +144,15 @@ export default {
                         </p>
                     </div>
                     <div class="teleconsulto-img col-12 col-sm-12 col-md-6 col-lg-5">
-                        <img src="https://img.freepik.com/free-vector/online-doctor-concept_23-2148506884.jpg?w=2000"
-                            alt="foto" width="100%">
+                        <img src="https://s0.esanum.it/backend/media/images/2022/8/24/3cbbb1ba-f991-4865-b56d-4c7f36f9fb71/renders/detailed_v4.jpg"
+                            alt="foto" >
                     </div>
                 </div>
                 <div class="d-md-flex d-lg-flex  telemontaggio">
 
                     <div class="telemontaggio-img col-12 col-sm-12 col-md-6 col-lg-5">
-                        <img src="https://img.freepik.com/free-vector/online-doctor-talking-patient_23-2148509191.jpg"
-                            alt="foto" width="100%">
+                        <img src="https://www.axa-im.it/sites/italy/files/styles/standard_banner_xs/public/header/innovation-and-medical-technology-concept-surgeons-team-using-hitech-picture-id1300936565-2.jpeg?h=7d90fc91&itok=0bZWRILl"
+                            alt="foto" >
                     </div>
                     <div class="telemontaggio-text col-12 col-sm-12 col-md-6 col-lg-5">
                         <h3>Telemonitoraggio</h3>
@@ -189,13 +183,13 @@ export default {
                         </p>
                     </div>
                     <div class="documenti-img col-12 col-sm-12 col-md-6 col-lg-5">
-                        <img src="https://img.freepik.com/free-vector/medical-professionals-watching-webinar-online-platform-people-having-virtual-class-flat-illustration_74855-16906.jpg?t=st=1690445211~exp=1690445811~hmac=598d127874c5fe00c28e5d2b45f9b034fa5fac47d1ffb9e356c627adcc9d05c9"
+                        <img src="https://www.aslcn2.it/media/2020/07/medicina-interna-1024x368.jpg"
                             alt="foto" width="100%">
                     </div>
                 </div>
                 <div class="d-md-flex d-lg-flex ricette">
                     <div class="ricette-img col-12 col-sm-12 col-md-6 col-lg-5">
-                        <img src="https://t4.ftcdn.net/jpg/04/56/70/85/240_F_456708586_72teUO1RFqXQay9OmztRvEgZDBQMPDyw.jpg"
+                        <img src="https://www.pmosanfrancesco.it/wp-content/uploads/2022/07/telemedicina-pinerolo-600x401.jpg"
                             alt="foto">
                     </div>
                     <div class="ricette-text col-12 col-sm-12 col-md-6 col-lg-5">
@@ -213,11 +207,7 @@ export default {
                 </div>
             </div>
         </section>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#333333" fill-opacity="1"
-                d="M0,128L48,154.7C96,181,192,235,288,261.3C384,288,480,288,576,272C672,256,768,224,864,229.3C960,235,1056,277,1152,282.7C1248,288,1344,256,1392,240L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-            </path>
-        </svg>
+        
         <AppFooter></AppFooter>
     </div>
 </template>
@@ -226,6 +216,7 @@ svg {
     margin-top: -2px;
     margin-bottom: -2px;
 }
+
 
 .jumbotron {
     background-image: url(https://assets-global.website-files.com/5d0b99352ab90c616bf47b31/6151b92e53e2c6a8ea8fe4e5_902-p-800.jpeg);
@@ -236,12 +227,13 @@ svg {
     background-size: cover;
     //background-repeat: no-repeat;
     background-position: center;
-    padding: 150px 0px 200px 0px;
+    
 
 
     .jumbo-container {
-        align-items: center;
+        // align-items: center;
         justify-content: center;
+        padding: 150px 0px 0px 0px;
 
 
 
@@ -278,19 +270,19 @@ svg {
         }
 
         .img-jumbo {
-            // width: 50%;
-
-
-
-
-            img {
+            position: relative;
+            display: flex;
+            align-items: end;
+         img{
                 width: 100%;
                 display: block;
-                aspect-ratio: 1;
-                border-radius: 50%;
+                margin-bottom: -2px;
+        }
 
-            }
 
+
+
+           
         }
     }
 }
@@ -300,6 +292,7 @@ svg {
     h2 {
         text-align: center;
         font-size: 2.6rem;
+        color: #19516C;
         //letter-spacing: 8px;
 
     }
@@ -427,13 +420,12 @@ svg {
 
         .teleconsulto-img {
             margin: 20px;
-
-
+            
             img {
                 border-radius: 50%;
-
+                aspect-ratio: 1;
                 width: 100%;
-
+                object-fit: cover;
             }
         }
 
@@ -496,7 +488,10 @@ svg {
 
             img {
 
+                border-radius: 50%;
+                aspect-ratio: 1;
                 width: 100%;
+                object-fit: cover;
 
             }
         }
@@ -528,8 +523,9 @@ svg {
 
             img {
                 border-radius: 50%;
-                // display: block;
+                aspect-ratio: 1;
                 width: 100%;
+                object-fit: cover;
             }
         }
 

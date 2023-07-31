@@ -74,7 +74,7 @@ export default {
             <hr class="text-white">
             <div class="social">
                 <div class="footer-certificazione ">
-                    <h5 class="">Certificazione e cicurezza</h5>
+                    <h5 class="">Certificazione e sicurezza</h5>
                     <div class="row-certificazione">
                         <ul class="p-0">
                             <li><img src="https://crdms.images.consumerreports.org/f_auto,w_600/prod/products/cr/models/399914-security-suites-norton-360-deluxe-10009006.png"
