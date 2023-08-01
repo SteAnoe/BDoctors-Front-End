@@ -235,7 +235,7 @@ export default {
 <template>
   <!-- CARD DOTTORE -->
 
-  <section class="doctor py-5">
+  <section class="doctor pb-5" style="padding-top: 100px;">
     <div class="container my-5 mt-5 h-40">
       <h3 class="fs-2 p-4 text-center card d-inline-block testo-centrale color-w">Dr.  {{ doctor.name }} {{ doctor.lastname }}</h3>
       <div class="row justify-content-center align-items-start">

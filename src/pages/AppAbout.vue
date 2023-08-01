@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-    <div class="wrapper mt-5">
+    <div class="wrapper" style="padding-top: 100px;">
         <div class="container">
             <h1 class="titolo-sanita">Rendiamo l'esperienza sanitaria più umana</h1>
             <div class="row">

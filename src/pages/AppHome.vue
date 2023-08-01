@@ -71,7 +71,7 @@ export default {
         <div class="jumbotron-sponsor">
             <section class="sponsorship-section">
                 <h2 class="py-5">Dottori in evidenza</h2>
-                <div class=" sponsorship">
+                <div class=" sponsorship container border">
                     <div class="s-content">
                         <div class="t-row">
     
@@ -83,7 +83,7 @@ export default {
                                         class="" alt="foto"> -->
                                     <!-- <img :src="doctor.photo" alt="foto"> -->
     
-                                    <img width="100%" class="img-fluid card-img-top "
+                                    <img id="min-height" width="100%" class="img-fluid card-img-top "
                                         :src="`${baseUrl}/storage/${doctor.photo}` != `${baseUrl}/storage/null` ? `${baseUrl}/storage/${doctor.photo}` : `https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg`"
                                         alt="foto">
                                     <div class="card-body">
@@ -161,7 +161,7 @@ export default {
                     <div class="documenti-text col-12 col-sm-12 col-md-6 col-lg-5">
                         <h3>La tua opinione vale!</h3>
                         <p>
-                            <b>Dicci cosa ne pensi dei dottori.</b>
+                            <b>Facci sapere cosa ne pensi dei dottori.</b>
                             Potrai lasciare una tua personale recensione sotto al profilo di ogni medico.
                             Le tue recensioni aiuteranno lo specialista a migliorarsi 
                             e allo stesso tempo aiuterai il prossimo utente nella sua ricerca.
@@ -196,6 +196,9 @@ export default {
     </div>
 </template>
 <style lang="scss" scoped>
+#min-height{
+    min-height: 284px;
+}
 #titolo-spec{
     padding-top: 150px;
 }
@@ -258,7 +261,7 @@ svg {
  
 //
 .jumbotron-sponsor{
-    
+    margin-bottom: 100px;
     .sponsorship-section {
         h2 {
             text-align: center;
