@@ -327,7 +327,7 @@ export default {
           </div> -->
           <div class="carousel-item card p-3 col-12 col-md-4 " v-for="(review, index) in doctor.reviews" :key="index">
             <p class="fw-bold">{{ review.name }} {{ review.lastname }}</p>
-            <p> &#8764; "{{ review.text }}" &#8764;</p>
+            <p class="fw-bold"> &#8764; "{{ review.text }}" &#8764;</p>
             <div>
               <i v-for="n in 5" class="fa-star empty"
                 :class="(n <= review.stars) ? 'fa-solid text-warning' : 'fa-regular'"></i>
@@ -380,7 +380,7 @@ export default {
             <p class="text-danger">{{ reviewErrorMessages.reviewStars }}</p>
           </div>
           <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Submit Review</button>
+            <button type="submit" class="btn btn-primary">lascia una recensione</button>
           </div>
         </form>
         </div>

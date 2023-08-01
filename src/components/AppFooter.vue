@@ -14,12 +14,12 @@ export default {
             <div class="footer-row  d-md-flex  d-sm-flex">
                 <div class="footer-body d-flex flex-wrap ">
                     <div class="footer-title pe-3">
-                        <h5>BDoctors</h5>
+                        <h3 class="font-weight-bold">BDoctors</h3>
                         <p>BDoctors srl</p>
                         <p>P.Iva 0345129833</p>
                     </div>
                     <div class="downloand-app">
-                        <h5>Downland App</h5>
+                        <h3 class="text-white font-weight-bold">Download</h3>
                         <div>
                             <img src="https://wi-fi.hk/Images/google_play_n.png" alt="" width="100px">
                         </div>
@@ -33,37 +33,34 @@ export default {
                 <div class="div d-flex flex-wrap justify-content-between">
                     <div class="footer-text">
                         <ul>
-                            <li>
-                                <h5>Sito</h5>
-                            </li>
-                            <li>><a href="#">Home</a></li>
-                            <li>><a href="#">Chi siamo</a></li>
-                            <li>><a href="#">Specializazioni</a></li>
-                            <li>><a href="#">Ricerca</a></li>
+                                <h4 class="text-white">Sito</h4>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="/about-us">Chi siamo</a></li>
+                            <li><a href="#ancor-spec">Specializzazioni</a></li>
+                            
                         </ul>
                     </div>
                     <div class="footer-text">
                         <ul>
-                            <li>
-                                <h5>Per i professionisti sanitari</h5>
-                            </li>
-                            <li>><a href="#">Privacy Policy</a></li>
-                            <li>><a href="#">Cookie Policy</a></li>
-                            <li>><a href="#">Condizioni di Servizio</a></li>
-                            <li>><a href="#">Informativa e consenso informativo</a></li>
-                            <li>><a href="#">Servizi Telemedicina</a></li>
+                                <h4 class="text-white">Per i professionisti sanitari</h4>
+                            
+                            <li><a href="#">Informazioni per i Professionisti Sanitari</a></li>
+                            <li><a href="#">Formazione e Corsi</a></li>
+                            <li><a href="#">Informazioni sull'Azienda o la Struttura Sanitaria</a></li>
+                            <li><a href="#">Aggiornamenti o Novità</a></li>
+                            <li><a href="#">Partnerships o Collaborazioni</a></li>
                         </ul>
                     </div>
                     <div class="footer-text">
                         <ul>
-                            <li>
-                                <h5>Termini e condizioni</h5>
-                            </li>
-                            <li>><a href="#">Privacy Policy</a></li>
-                            <li>><a href="#">Cookie Policy</a></li>
-                            <li>><a href="#">Condizioni di Servizio</a></li>
-                            <li>><a href="#">Informativa e consenso informativo</a></li>
-                            <li>><a href="#">Servizi Telemedicina</a></li>
+                            
+                            <h4 class="text-white">Termini e condizioni</h4>
+                        
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                            <li><a href="#">Condizioni di Servizio</a></li>
+                            <li><a href="#">Informativa e consenso informativo</a></li>
+                            <li><a href="#">Servizi Telemedicina</a></li>
                         </ul>
                     </div>
                 </div>
@@ -114,7 +111,7 @@ footer {
     padding: 40px 10px;
 
     .footer-body {
-        padding-left: 2rem;
+         padding-left: 2rem;
     }
 }
 
@@ -140,7 +137,9 @@ footer {
     .footer-text {
         font-size: 14px;
 
-
+        h4{
+            font-weight: bold;
+        }
         ul {
             li {
                 list-style: none;
@@ -148,12 +147,18 @@ footer {
                 font-weight: 100;
             }
         }
+        li:hover{
+            background-color: #ffffff;
+        }
 
         a {
             text-decoration: none;
             font-size: 1rem;
             color: #fff;
-            padding-left: 10px;
+        }
+        a:hover{
+            color:black;
+            font-weight: bold;
         }
     }
 
@@ -200,7 +205,7 @@ footer {
 
     }
 
-    .footer-social {}
+    
 
     .social-title h4 {
         color: #fff;

@@ -54,7 +54,8 @@ export default {
         <section class="jumbotron">
             <div class="container h-100 d-flex jumbo-container align-items-center justify-content-center">
                 <div class="testo-jumbo text-center">
-                    <h1>BDoctors</h1>
+                    <h1 class="">BDoctors</h1>
+                    <p class="fs-5"><b>Portale per la ricerca di medici specializzati</b></p>
                     <a href="#ancor-spec" class="btn px-5 text-white text-uppercase">Inizia ricerca</a>
                 </div>
             </div>
@@ -86,7 +87,7 @@ export default {
                                         :src="`${baseUrl}/storage/${doctor.photo}` != `${baseUrl}/storage/null` ? `${baseUrl}/storage/${doctor.photo}` : `https://static.vecteezy.com/system/resources/thumbnails/001/363/116/small/female-doctor-cute-character-vector.jpg`"
                                         alt="foto">
                                     <div class="card-body">
-                                        <h5 class="card-title">DR.{{ doctor.name }} {{ doctor.lastname }}</h5>
+                                        <h5 class="card-title">Dott. {{ doctor.name }} {{ doctor.lastname }}</h5>
                                         <p class="card-text" v-for="elem in doctor.specializations">{{ elem.name }}</p>
                                     </div>
                                 </router-link>
@@ -99,10 +100,10 @@ export default {
         </div>
 
         
-        <section class="specializzazioni-sfondo">
+        <section id="ancor-spec" class="specializzazioni-sfondo">
             <main class="container">
                 <div class="pb-3 ">
-                    <h2 id="ancor-spec" class="text-center py-5">Specializzazioni</h2>
+                    <h2 id="titolo-spec" class="text-center">Specializzazioni</h2>
                     <div class="md-3 content-card">
                         <div class=" col-lg-3 col-md-4 col-sm-6 col-12 " v-for="(elem, index) in specializations"
                             :key="index">
@@ -125,16 +126,13 @@ export default {
                 <h2>Una piattaforma di telemedicina a misura di utente!</h2>
                 <div class="d-md-flex d-lg-flex teleconsulto">
                     <div class="teleconsulto-text col-12 col-sm-12 col-md-6 col-lg-5">
-                        <h3>Teleconsulto prioritario</h3>
+                        <h3>Contatta il medico specialista!</h3>
                         <p>
                             <b>Hai bisogno di un consulto in tempi rapidi?</b>
-                            Doctorium è la piattaforma di telemedicina che ti permette di effettuare un teleconsulto in
-                            brevissimo
-                            tempo. Non trovi l'appuntamento più adatto a te? Richiedine uno prioritario! I nostri
-                            specialisti lo
-                            creeranno appositamente per te e potrai effettuarlo anche oggi stesso. Inoltre, se lo
-                            specialista è
-                            disponibile, potrai richiedere un consulto immediato.
+                            BDoctors è la piattaforma di telemedicina che ti permette di mandare un messaggio in
+                            brevissimo tempo, al medico più utile per te. 
+                            Lo specialista sarà disponibile a risponderti il prima possibile, 
+                            per un semplice consulto medico o per fissare un appuntamento.
                         </p>
                     </div>
                     <div class="teleconsulto-img col-12 col-sm-12 col-md-6 col-lg-5">
@@ -149,31 +147,24 @@ export default {
                             alt="foto" >
                     </div>
                     <div class="telemontaggio-text col-12 col-sm-12 col-md-6 col-lg-5">
-                        <h3>Telemonitoraggio</h3>
+                        <h3>Ricerca avanzata e veloce!</h3>
                         <p>
-                            <b>Misura i tuoi parametri vitali e condividili con uno specialista.</b>
-                            Abbonati al servizio di Telemedicina, riceverai al tuo domicilio un kit con strumenti e
-                            dispositivi
-                            per
-                            il telemonitoraggio dei tuoi parametri vitali. Dopo ogni misurazione i dati verranno caricati
-                            automaticamente sulla piattaforma ed elaborati sotto forma di un grafico. Inoltre, potrai
-                            condividerli
-                            con lo specialista durante la tua televisita.
+                            <b>Trova il tuo medico tra le tante specializzazioni.</b>
+                            Grazie alla nostra ricerca per specializzazioni, 
+                            potrai trovare in tempi brevissimi il medico che fa per te.
+                            In maniera facile e intuitiva potrai anche filtrare gli specialisti
+                            in base alle recensioni e al voto che hanno dato gli altri utenti.
                         </p>
                     </div>
                 </div>
                 <div class="d-md-flex d-lg-flex  documenti">
                     <div class="documenti-text col-12 col-sm-12 col-md-6 col-lg-5">
-                        <h3>Referti online e documenti clinici</h3>
+                        <h3>La tua opinione vale!</h3>
                         <p>
-                            <b>Carica i tuoi referti online.</b>
-                            Con Doctorium puoi caricare i tuoi documenti clinici sulla piattaforma e mostrali allo
-                            specialista.
-                            Hai
-                            a disposizione un ampio spazio dove caricare documenti clinici o immagini radiologiche come TC,
-                            RM,
-                            RX
-                            ecc. Lo specialista, durante il videoconsulto potrà vederli e commentarli con te.
+                            <b>Dicci cosa ne pensi dei dottori.</b>
+                            Potrai lasciare una tua personale recensione sotto al profilo di ogni medico.
+                            Le tue recensioni aiuteranno lo specialista a migliorarsi 
+                            e allo stesso tempo aiuterai il prossimo utente nella sua ricerca.
                         </p>
                     </div>
                     <div class="documenti-img col-12 col-sm-12 col-md-6 col-lg-5">
@@ -187,14 +178,13 @@ export default {
                             alt="foto">
                     </div>
                     <div class="ricette-text col-12 col-sm-12 col-md-6 col-lg-5">
-                        <h3>Ricette mediche online</h3>
-                        <p><b>Concentrati solo su di te.</b>
-                            Durante il teleconsulto concentrati non dovrai preoccuparti di prendere appunti perché alla fine
-                            del
-                            consulto riceverai un riepilogo scritto, firmato digitalmente dal dottore, che potrai stampare o
-                            condividere. Inoltre, qualora lo specialista lo ritenesse necessario, potrà allegare una ricetta
-                            medica
-                            o una prescrizione per farmaci online.
+                        <h3>Un sito per dottori!</h3>
+                        <p><b>9 dottori su 10 ci hanno scelto.</b>
+                            Se sei un dottore, iscriviti in modo semplice e sicuro.
+                            Potrai accedere a servizi esclusivi, mettendoti in mostra sulla nostra piattaforma.
+                            Potrai sponsorizzare il tuo profilo così da ampliare la tua rete di pazienti,
+                            comunicare con loro e ricevere delle recensioni che ti aiuteranno
+                            a migliorare.
                         </p>
                     </div>
 
@@ -206,6 +196,9 @@ export default {
     </div>
 </template>
 <style lang="scss" scoped>
+#titolo-spec{
+    padding-top: 150px;
+}
 svg {
     margin-top: -2px;
     margin-bottom: -2px;
@@ -216,7 +209,7 @@ svg {
     background-image: url(https://assets-global.website-files.com/5d0b99352ab90c616bf47b31/6151b92e53e2c6a8ea8fe4e5_902-p-800.jpeg);
     //background: rgb(34, 193, 195);
     //background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(3, 150, 166, 1) 65%);
-    color: white;
+    //color: white;
     margin-top: 56px;
     background-size: cover;
     //background-repeat: no-repeat;
@@ -231,10 +224,21 @@ svg {
             
             
 
-            h1 {
+            h1{
                 font-size: 4rem;
-                letter-spacing: 5px;
+                letter-spacing: 4px;
+                color: #ffffff;
+                text-shadow: 4px 3px 0px #000, 9px 8px 0px rgba(0, 0, 0, 0.35);
+            }
 
+            .double-shadow {
+                // background: #aaaaaa;
+                
+            }
+            p{
+                text-shadow: 1px 1px 10px white;
+                -webkit-text-stroke-width: 0.5px;
+                -webkit-text-stroke-color: rgb(0, 0, 0); 
             }
 
             .btn {

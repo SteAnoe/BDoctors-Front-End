@@ -19,6 +19,7 @@ export default {
             lastPage: null,
             sortingOption: 'null',
             sortBy: null,
+           
         }
     },
     created() {
@@ -97,9 +98,9 @@ export default {
 
             return false; // Doctor has sponsorships, but they are all expired
         },
-        formatAvgStars(avgStars) {
-            return Math.round(avgStars);
-        },
+        // formatAvgStars(avgStars) {
+        //     return Math.round(avgStars);
+        // },
         generateStars(avgStars, color) {
             const fullStars = Math.floor(avgStars); // Number of full stars
             const halfStar = avgStars - fullStars >= 0.5; // Whether to show a half star
@@ -129,6 +130,9 @@ export default {
                 return 'https://t4.ftcdn.net/jpg/01/22/08/35/360_F_122083515_l2NbdWla7e38dCtAq8aXHgNLLE7AwrzX.jpg';
             }
         },
+        
+        
+        
     }
 }
 </script>
@@ -144,22 +148,33 @@ export default {
                 <div class="filtri d-flex flex-column flex-md-row justify-content-around">
                     <div class="mt-4">
                         <h3>Filtra per voto</h3>
-                        <select v-model="minVoteFilter" @change="applyFilter">
-                            <option :value="0">Tutti</option>
-                            <option :value="1"><span>&#9733;</span></option>
-                            <option :value="2">&#9733;&#9733;</option>
-                            <option :value="3">&#9733;&#9733;&#9733;</option>
-                            <option :value="4">&#9733;&#9733;&#9733;&#9733;</option>
-                            <option :value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
-                        </select>
+                        <div class="select">
+ 
+                            <select class="custom-select" v-model="minVoteFilter" @change="applyFilter">
+                                <option :value="0">Tutti</option>
+                                <option :value="1"><span>&#9733;</span></option>
+                                <option :value="2">&#9733;&#9733;</option>
+                                <option :value="3">&#9733;&#9733;&#9733;</option>
+                                <option :value="4">&#9733;&#9733;&#9733;&#9733;</option>
+                                <option :value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+                            </select>
+                        </div>
                     </div>
+
+
+
+
+                    
                     <div class="mt-4">
                         <h3>Ordina</h3>
-                        <select v-model="sortBy" @change="applyFilter">
-                            <option :value="null">Ordina per</option>
-                            <option value="reviews">Numero di Recensioni</option>
-                            <option value="average_vote">Voto medio</option>
-                        </select>
+                        <div class="select">
+
+                            <select v-model="sortBy" @change="applyFilter">
+                                <option :value="null">Ordina per</option>
+                                <option value="reviews">Numero di Recensioni</option>
+                                <option value="average_vote">Voto medio</option>
+                            </select>
+                        </div>
                     </div>
 
                 </div>
@@ -205,8 +220,8 @@ export default {
                                     <div class="col-sm-6 col-md-6">
                                         <div class="card-body ms-3">
                                             <span><strong>N° Recensioni:</strong> {{ doctor.reviews_count }}</span>
-                                            <p class="my-2">Avg-stars: {{ formatAvgStars(doctor.avg_stars) }}</p>
-                                            <div v-html="generateStars(doctor.avg_stars)" class="mb-2"></div>
+                                            <p class="my-2">Voto medio: {{  doctor.avg_stars }} &#9733;</p>
+                                            <!-- <div v-html="generateStars(doctor.avg_stars)" class="mb-2"></div> -->
                                             <div class="mt-3">
                                                 <p class="my-2 pb-2"><strong>Specializzato in</strong></p>
                                                 <ul class="my-1">
@@ -243,8 +258,8 @@ export default {
                                     <div class="col-sm-6 col-md-6">
                                         <div class="card-body ms-3">
                                             <span><strong>N° Recensioni:</strong> {{ doctor.reviews_count }}</span>
-                                            <p class="my-2">Avg-stars: {{ formatAvgStars(doctor.avg_stars) }}</p>
-                                            <div v-html="generateStars(doctor.avg_stars)" class="mb-2"></div>
+                                            <p class="my-2">Voto medio: {{  doctor.avg_stars }} &#9733;</p>
+                                            <!-- <div v-html="generateStars(doctor.avg_stars)" class="mb-2"></div> -->
                                             <div class="mt-3">
                                                 <p class="my-2 pb-2"><strong>Specializzato in</strong></p>
                                                 <ul class="my-1">
@@ -425,4 +440,59 @@ export default {
 .half-filled {
     color: yellow;
 }
+select {
+  /* Reset Select */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  color: #fff;
+  background-color: #2c3e50;
+  background-image: none;
+  cursor: pointer;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  border-radius: .25em;
+  overflow: hidden;
+  margin: 0 auto;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  background-color: #34495e;
+  transition: .25s all ease;
+  pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+/* Apply hover effect to option elements */
+select option {
+  color: #f39c12;
+}
+
+
+
+
+
+
+
 </style>

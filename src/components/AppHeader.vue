@@ -48,7 +48,7 @@ export default {
                         <a class="nav-link" href="/about-us">CHI SIAMO</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link bottonemedico" href="http://127.0.0.1:8000/login">SEI UN DOTTORE?</a>
+                        <a class="nav-link bottonemedico" href="http://127.0.0.1:8000/login">ACCEDI</a>
                     </li>
                   
                 </ul>
